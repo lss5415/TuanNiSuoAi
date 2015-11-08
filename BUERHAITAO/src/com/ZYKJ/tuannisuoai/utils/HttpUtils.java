@@ -61,6 +61,20 @@ public class HttpUtils {
 	}
 
 	/**
+	 * 1第三方登录
+	 * @param res
+	 * @param loginname
+	 * @param pwd
+	 */
+
+	public static void login(AsyncHttpResponseHandler res, RequestParams params) {
+		String url = null;
+		url = base_url + "index.php?act=login";
+		client.post(url,params,res);
+
+	}
+
+	/**
 	 * 2注册
 	 * 
 	 * @param res
