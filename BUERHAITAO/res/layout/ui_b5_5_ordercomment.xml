@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white" >
+
+    <!-- title -->
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <!-- 导入title -->
+
+        <include layout="@layout/layout_head" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/title_head"
+            android:text="评价宝贝"
+            android:textSize="18sp" />
+
+        <ImageButton
+            android:id="@+id/order_back"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:background="@null"
+            android:contentDescription="@string/app_name"
+            android:padding="5dp"
+            android:src="@drawable/symbol_left1" />
+    </RelativeLayout>
+    <!-- 商品展示 -->
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/relativeLayout3"
+        android:layout_marginTop="24dp"
+        android:background="@color/white" >
+    </RelativeLayout>
+<RelativeLayout  
+    android:layout_below="@+id/relativeLayout1"
+    android:id="@+id/listview_goodslist1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <ListView
+        android:id="@+id/listview_goodslist"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1">
+    </ListView>
+</RelativeLayout >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/listview_goodslist1"
+        android:background="@color/white" >
+
+        <TextView
+            android:id="@+id/tv_orderprice_c"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="14dp"
+            android:text="实付:￥00.00" />
+
+        <TextView
+            android:id="@+id/tv_ordergoodsnumber_c"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_orderprice_c"
+            android:layout_alignBottom="@+id/tv_orderprice_c"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@+id/tv_orderprice_c"
+            android:text="共X件商品" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/v1"
+        android:layout_width="10dp"
+        android:layout_height="30dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/relativeLayout3"
+        android:background="@color/theme_grey" />
+
+</RelativeLayout>

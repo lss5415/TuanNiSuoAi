@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ZYKJ.buerhaitao"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="18" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <!-- 网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 改变屏幕权限 -->
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <!-- 添加读取读写文件的权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 创建文件或目录的权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- 拨打电话权限 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!-- 高德定位相关 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 手机状态获取 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- wifi 权限获取 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 拍照 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    
+        <!-- 推送相关的权限 -->
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+<!-- 以下为推送权限（可选） -->
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
+    <!-- QQ、QQ空间所需权限 -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+
+    <application
+        android:name="com.ZYKJ.buerhaitao.base.BaseApp"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Light.NoTitleBar" >
+        <activity
+            android:name="com.ZYKJ.buerhaitao.UI.B0_MainActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.ZYKJ.buerhaitao.UI.A0_Welcome"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.A1_IntroActivity" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B1_HomeActivity" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B5_MyActivity" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B5_1_LoginActivity" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B5_1_1_RegistActivity" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B5_12_SetActivity" >
+        </activity>
+        <!-- 短信验证 -->
+        <activity
+            android:name="com.mob.tools.MobUIShell"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B5_2_MyPointsDetail" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B5_11_PointsMall" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B5_11_1_ExchangeDetail" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B5_9_MyAddressManagement" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B5_9_1_addAddress" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B5_9_1_getArea" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B1_1_NvShiFuZhuang" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B1_2_NanShiFuZhuang" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B1_3_MuYing" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B1_4_HuaZhuangPin" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B1_5_ShouJiShuMa" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B1_6_BanGongJiaDian" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B1_7_ShengHuoFuWu" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B1_8_TeChan" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B1_a1_TianTianTeJia" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B5_3_ShaiDanQuan" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B1_a2_CaiNiXiHuan" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B1_a3_MeiRiHaoDian" >
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B1_a4_SearchActivity" >
+        </activity>
+        <!-- 首页分类 -->
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B2_ClassifyActivity">
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.BX_DianPuXiangQingActivity">
+            
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.Sp_GoodsInfoActivity">
+            
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.B3_ShoppingCartActivity">
+            
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.Sp_a1_GoodsEvaluation">
+            
+        </activity>
+        <activity android:name="com.ZYKJ.buerhaitao.UI.Sp_a2_XingHao"
+            	  android:theme="@android:style/Theme.Translucent">
+            
+        </activity>
+        <activity android:name="B5_12_1_Certification"></activity>
+        <activity android:name="B5_11_2_ExchangeRecord"></activity>
+        <activity android:name="B5_3_MyShaiDanQuan"></activity>
+        <activity android:name="PhotoActivity"></activity>
+        <activity android:name=".UI.B5_12_1_Certification"></activity>
+        <activity android:name=".UI.B5_11_2_ExchangeRecord"></activity>
+        <activity android:name=".UI.B5_3_MyShaiDanQuan"></activity>
+        <activity android:name=".UI.PhotoActivity"></activity>
+        <activity android:name="com.ZYKJ.buerhaitao.utils.BitmapCache"></activity>
+        <activity android:name="com.ZYKJ.buerhaitao.utils.ImageGridActivity"></activity>
+        <activity android:name=".UI.PublishedActivity"></activity>
+        <activity android:name=".UI.TestPicActivity"></activity>
+       <!-- 微社区 -->
+       <activity
+            android:name="com.umeng.community.example.MainActivity_we"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
+        <!-- 发现的Activity -->
+        <activity
+            android:name="com.umeng.comm.ui.activities.FindActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+       <!--  -->
+        <activity
+            android:name="com.umeng.comm.ui.activities.UserInfoActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <!--  -->
+        <activity
+            android:name="com.umeng.comm.ui.activities.TopicDetailActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <!--  -->
+        <activity
+            android:name="com.umeng.comm.ui.activities.FeedsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <!-- 搜索结果Activity -->
+        <activity
+            android:name="com.umeng.comm.ui.activities.RelativeUserActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <!--  -->
+        <activity
+            android:name="com.umeng.comm.ui.activities.PostFeedActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <!--  -->
+        <activity
+            android:name="com.umeng.comm.ui.activities.ForwardActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <!-- 搜索Activity -->
+        <activity
+            android:name="com.umeng.comm.ui.activities.SearchActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <!-- feed详情页面 -->
+        <activity
+            android:name="com.umeng.comm.ui.activities.FeedDetailActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <!-- 设置页面activity -->
+        <activity android:name="com.umeng.comm.ui.activities.SettingActivity" />
+
+        <!-- 引导页面activity -->
+        <activity android:name="com.umeng.comm.ui.activities.GuideActivity" />
+       <!-- 友盟登录界面,不属于SDK -->
+        <activity android:name="com.umeng.login.views.LoginActivity" />
+        
+        <!-- QQ登录 -->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent100424468" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+         <!-- 微信登录 -->
+        <activity
+            android:name="com.umeng.community.example.wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- ##################### 推送相关 ##################### -->
+       <receiver
+    android:name="com.umeng.message.NotificationProxyBroadcastReceiver"
+    android:exported="false" >
+</receiver>
+<receiver android:name="com.umeng.message.RegistrationReceiver" >
+    <intent-filter>
+        <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+    </intent-filter>
+    <intent-filter>
+        <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+        <data android:scheme="package" />
+    </intent-filter>
+
+ 
+    <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+    </intent-filter>
+
+</receiver>
+<receiver android:name="com.umeng.message.UmengBroadcastReceiver" >
+    <intent-filter>
+        <action android:name="org.agoo.android.intent.action.RECEIVE" />
+    </intent-filter>
+    <intent-filter>
+        <action android:name="com.ZYKJ.buerhaitao.intent.action.COMMAND" />
+    </intent-filter>
+    <intent-filter>
+        <action android:name="org.agoo.android.intent.action.RE_ELECTION_V2" />
+    </intent-filter>
+</receiver>
+<receiver android:name="com.umeng.message.BootBroadcastReceiver" >
+    <intent-filter>
+       <action android:name="android.intent.action.BOOT_COMPLETED" />
+   </intent-filter>
+</receiver>
+       <service
+    android:name="com.umeng.message.UmengService"
+   android:label="PushService" 
+    android:exported="true" 
+    android:process=":pushService_v1" >
+    <intent-filter>
+        <action android:name="com.ZYKJ.buerhaitao.intent.action.START" />
+    </intent-filter>
+    <intent-filter>
+        <action android:name="com.ZYKJ.buerhaitao.intent.action.COCKROACH" />
+    </intent-filter>
+    <intent-filter>
+        <action android:name="org.agoo.android.intent.action.PING" />
+    </intent-filter>
+</service>
+<service
+    android:name="org.android.agoo.service.ElectionService"
+    android:exported="true"
+    android:process=":pushService_v1" >
+    <intent-filter>
+        <action android:name="org.agoo.android.intent.action.ELECTION_V2" />
+    </intent-filter>
+</service>
+<service android:name="com.umeng.message.UmengIntentService" />
+<!-- V1.3.0添加的service，负责下载通知的资源 -->
+<service android:name="com.umeng.message.UmengDownloadResourceService" />
+        <meta-data
+    android:name="UMENG_APPKEY"
+    android:value="5597978467e58ed8f700c873" >
+</meta-data>
+<meta-data
+    android:name="UMENG_MESSAGE_SECRET"
+    android:value="4ab5a47caff7b38b558ce6d0c3f0d30b" >
+</meta-data>
+<meta-data
+    android:name="UMENG_CHANNEL"
+    android:value="Channel ID" >
+</meta-data>
+        <!-- <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="4eaee02c527015373b000003" >
+        </meta-data>
+        <meta-data
+            android:name="UMENG_MESSAGE_SECRET"
+            android:value="a102852523d3070310d74f676d128a3c" >
+        </meta-data> -->
+        <activity android:name=".UI.B5_13_MyPurse"></activity>
+        
+<!-- Ping++ SDK 注册 -->
+<activity
+    android:name="com.pingplusplus.android.PaymentActivity"
+    android:launchMode="singleTop"
+    android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+<!-- 微信支付注册 -->
+<activity-alias
+    android:name=".wxapi.WXPayEntryActivity"
+    android:exported="true"
+    android:targetActivity="com.pingplusplus.android.PaymentActivity" />
+<!-- 支付宝注册 -->
+<activity
+    android:name="com.alipay.sdk.app.H5PayActivity"
+    android:configChanges="orientation|keyboardHidden|navigation"
+    android:exported="false"
+    android:screenOrientation="behind" />
+<activity android:name=".UI.B5_10_MyCollection"></activity>
+<activity android:name=".UI.B5_5_OrderStatus"></activity>        
+    </application>
+
+</manifest>

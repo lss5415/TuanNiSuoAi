@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/theme_grey"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <!-- 导入title -->
+
+        <include layout="@layout/layout_head" />
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/title_head"
+            android:text="@string/pointsMall"
+            android:textSize="18sp"/>
+
+        <ImageButton
+            android:id="@+id/pointsmall_back"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:background="@null"
+            android:contentDescription="@string/app_name"
+            android:padding="5dp"
+            android:src="@drawable/symbol_left1" />
+
+        <TextView
+            android:id="@+id/tv_record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="兑换记录"
+            android:textColor="@color/white"
+            android:textSize="13sp" />
+
+    </RelativeLayout>
+    <RelativeLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="40dp"
+	    android:background="@color/theme_grey">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
+            android:textColor="@color/black"
+            android:text="@string/mypoints" 
+            />
+
+        <TextView
+            android:id="@+id/tv_totlePoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView1"
+            android:layout_alignBottom="@+id/textView1"
+            android:layout_marginLeft="14dp"
+            android:layout_toRightOf="@+id/textView1"
+            android:textColor="@color/theme_color"
+            android:text="2000" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_totlePoints"
+            android:layout_toRightOf="@+id/tv_totlePoints"
+            android:textColor="@color/black"
+            android:text="分" />
+    </RelativeLayout>
+    <com.ZYKJ.tuannisuoai.view.MyListView
+        android:id="@+id/listview_pointsMall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </com.ZYKJ.tuannisuoai.view.MyListView>
+
+</LinearLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/theme_grey"
+    android:orientation="vertical" >
+    
+<RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <!-- 导入title -->
+
+        <include layout="@layout/layout_head" />
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/title_head"
+            android:text="@string/exchangerecord" 
+            android:textSize="18sp"/>
+
+        <ImageButton
+            android:id="@+id/record_back"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:background="@null"
+            android:contentDescription="@string/app_name"
+            android:padding="5dp"
+            android:src="@drawable/symbol_left1" />
+    </RelativeLayout>
+    <com.ZYKJ.tuannisuoai.view.MyListView
+        android:id="@+id/listview_record"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </com.ZYKJ.tuannisuoai.view.MyListView>
+
+</LinearLayout>

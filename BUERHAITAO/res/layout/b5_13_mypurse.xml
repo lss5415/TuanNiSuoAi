@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <!-- 导入title -->
+
+        <include layout="@layout/layout_head" />
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/title_head"
+            android:text="@string/mypurse" 
+            android:textSize="18sp"/>
+
+        <ImageButton
+            android:id="@+id/mypurse_back"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:background="@null"
+            android:contentDescription="@string/app_name"
+            android:padding="5dp"
+            android:src="@drawable/symbol_left1" />
+
+    </RelativeLayout>
+    <!-- 钱包余额 -->
+	<LinearLayout 
+	        android:layout_width="match_parent"
+	        android:layout_height="40dp"
+	        android:orientation="horizontal"
+	    >
+	     <View 
+	        android:layout_width="10dp"
+	        android:layout_height="40dp"/>
+	    <TextView
+	        android:layout_gravity="center_vertical"
+	        android:id="@+id/textView1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:text="钱包余额" />
+	
+	    <TextView
+	       android:gravity="right"
+	        android:layout_gravity="center_vertical"
+	        android:layout_weight="1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/theme_color"
+	        android:text="￥" />
+	
+	    <TextView
+	       android:gravity="right"
+	        android:layout_gravity="center_vertical"
+	        android:id="@+id/tv_remaining"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/theme_color"
+	        android:text="56.00" />
+		<View 
+	        android:layout_width="10dp"
+	        android:layout_height="40dp"/>
+	</LinearLayout>
+		<View 
+	        android:layout_width="match_parent"
+	        android:layout_height="6dp"
+	        android:background="@color/theme_grey"/>
+	
+	<!-- 充值金额说明 -->
+	<!-- 充值金额 -->
+
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="40dp"
+	    android:orientation="horizontal" >
+
+	    <View
+	        android:layout_width="10dp"
+	        android:layout_height="40dp" />
+
+	    <TextView
+	        android:id="@+id/tv_chargeNumber"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_vertical"
+	        android:text="充值金额" />
+
+	    <View
+	        android:layout_width="10dp"
+	        android:layout_height="40dp" />
+
+	    <EditText
+	        android:id="@+id/et_chagenumber"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:layout_weight="1"
+	        android:background="@null"
+	        android:ems="10"
+	        android:hint="@string/pleaseinputnumber" />
+
+	    <View
+	        android:layout_width="10dp"
+	        android:layout_height="40dp" />
+	</LinearLayout>
+
+	<View
+	    android:layout_width="match_parent"
+	    android:layout_height="6dp"
+	    android:background="@color/theme_grey" />
+
+	<TextView
+	    android:id="@+id/textView4"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="\t1.充值方式：支付宝充值、微信充值\n\t2.余额使用方式：支持此APP的所有支付\n\t3.此APP暂时不支持余额取现功能" />
+
+	<View 
+	        android:layout_width="match_parent"
+	        android:layout_height="250dp"/>
+	<LinearLayout 
+	    android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+	      <View
+	        android:layout_width="10dp"
+	        android:layout_height="50dp"/>
+
+	   <Button
+	       android:id="@+id/btn_recharge"
+	       android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:background="@drawable/shape_btn_background"
+	       android:paddingBottom="10dp"
+	       android:paddingLeft="5dp"
+	       android:paddingRight="5dp"
+	       android:paddingTop="10dp"
+	       android:text="@string/chargenow"
+	       android:textColor="@color/white"
+	       android:layout_weight="1"
+	       android:textSize="20sp" />
+
+	    <View
+	        android:layout_width="10dp"
+	        android:layout_height="50dp" />
+
+	    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 猜你喜欢 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <!-- 导入title -->
+
+        <include layout="@layout/layout_head" />
+
+        <TextView
+            style="@style/title_head"
+            android:text="猜你喜欢"
+            android:textSize="18sp" />
+
+        <ImageButton
+            android:id="@+id/b1_a2_back"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:background="@null"
+            android:contentDescription="@string/app_name"
+            android:padding="5dp"
+            android:src="@drawable/symbol_left1" />
+    </RelativeLayout>
+    <com.ZYKJ.tuannisuoai.view.MyListView
+        android:id="@+id/listview_b1_a2_like"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.ZYKJ.tuannisuoai.view.MyListView>
+
+</LinearLayout>

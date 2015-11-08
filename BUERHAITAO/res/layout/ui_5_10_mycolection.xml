@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <include
+            android:id="@+id/include1"
+            layout="@layout/layout_head" />
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/title_head"
+            android:text="@string/my_store"
+            android:textSize="18sp" />
+
+        <ImageButton
+            android:id="@+id/mycollection_back"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:background="@null"
+            android:contentDescription="@string/app_name"
+            android:padding="5dp"
+            android:src="@drawable/symbol_left1" />
+
+        <TextView
+            android:id="@+id/tv_regist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/tv_regist"
+            android:text="@string/edit"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp" />
+
+    <!-- <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rl_delete"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@color/white" >
+
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="180dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/shape_btn_background_yellow"
+            android:text="@string/umeng_comm_delete_feed_tips"
+            android:textColor="@color/white" />
+    </RelativeLayout> -->
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/relativeLayout1"
+        android:background="@color/white" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/ll_product"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="@string/product" />
+
+                <View
+                    android:id="@+id/v1_s"
+                    android:layout_width="70dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/theme_color" />
+            </LinearLayout>
+			<View 
+			    android:layout_width="1dp"
+			    android:layout_height="fill_parent"
+			    android:background="#EEE"/>
+            <LinearLayout
+                android:id="@+id/ll_store"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="@string/tab_store" />
+
+                <View
+                    android:id="@+id/v2_s"
+                    android:layout_width="70dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/theme_color"
+                    android:visibility="invisible" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <com.ZYKJ.tuannisuoai.view.MyListView
+        android:id="@+id/listview_colllection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/relativeLayout2" >
+    </com.ZYKJ.tuannisuoai.view.MyListView>
+
+</RelativeLayout>

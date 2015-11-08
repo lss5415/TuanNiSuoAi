@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/theme_grey" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <!-- 导入title -->
+
+        <include layout="@layout/layout_head" />
+
+        <TextView 
+            android:id="@+id/textView3"
+            style="@style/title_head"
+            android:text="@string/area"
+            android:textSize="18sp" />
+    </RelativeLayout>
+<ScrollView 
+    	android:id="@+id/ScrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout1"
+    >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/ll_left"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <com.ZYKJ.tuannisuoai.view.ListViewForScroll
+                android:id="@+id/lv_class_left"
+                android:layout_width="wrap_content"
+                android:layout_height="856dp"
+                android:scrollbars="none" >
+            </com.ZYKJ.tuannisuoai.view.ListViewForScroll>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_middle"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <com.ZYKJ.tuannisuoai.view.ListViewForScroll
+                android:id="@+id/lv_class_middle"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/b0_class_middlebg"
+                android:scrollbars="none" >
+            </com.ZYKJ.tuannisuoai.view.ListViewForScroll>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_right"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <com.ZYKJ.tuannisuoai.view.ListViewForScroll
+                android:id="@+id/lv_class_right"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#EC9F32"
+                android:scrollbars="none" >
+            </com.ZYKJ.tuannisuoai.view.ListViewForScroll>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+</RelativeLayout>

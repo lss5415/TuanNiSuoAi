@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp" >
+
+                    <ImageView
+                        android:id="@+id/im_sp_a1_userimage"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/buerhaitao" />
+
+                    <TextView
+                        android:id="@+id/tv_sp_a1_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="15dp"
+                        android:text="我没起名字"
+                        android:textColor="#000"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp" >
+
+                    <RatingBar
+                        android:id="@+id/rating_bar_sp_a1_xiangqing"
+                        style="@style/coupon_Rating_Bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:isIndicator="true"
+                        android:stepSize="0.5" >
+                    </RatingBar>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp" >
+
+                    <TextView
+                        android:id="@+id/tv_sp_a1_pingjia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="这都是什么玩意，评价怎么写？"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:textColor="#808080" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp" >
+
+                    <ScrollView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" >
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp" >
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/buerhaitao" />
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/buerhaitao" />
+                        </LinearLayout>
+                    </ScrollView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp" >
+
+                    <TextView
+                        android:id="@+id/tv_sp_a1_chanpincanshu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:layout_gravity="center_vertical"
+                        android:text="2015/6/27 机身颜色：射阿萨德服务；阿萨德发撒的；阿德撒地方；玩儿玩儿的说法"
+                        android:textColor="#808080" />
+                </LinearLayout>
+            </LinearLayout>
+	<View 
+	    android:layout_width="fill_parent"
+	    android:layout_height="1dp"
+	    android:background="#DDD"/>
+</LinearLayout>

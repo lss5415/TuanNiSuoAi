@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <include
+            android:id="@+id/include1"
+            layout="@layout/layout_head" />
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/title_head"
+            android:text="@string/productmanage"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_regist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/tv_regist"
+            android:text="@string/edit"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp" />
+
+    <!--
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rl_delete"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@color/white" >
+
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="180dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/shape_btn_background_yellow"
+            android:text="@string/umeng_comm_delete_feed_tips"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+    -->
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/relativeLayout1"
+        android:background="@color/white" >
+
+        <LinearLayout
+            android:id="@+id/qwe"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/ll_selling"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_chushouzhong"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="@string/selling"
+                    android:textColor="#FF5500" />
+
+                <View
+                    android:id="@+id/v1_s"
+                    android:layout_width="50dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/theme_color" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="#EEE" />
+
+            <LinearLayout
+                android:id="@+id/ll_outlet"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_yixiajia"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="@string/outlet"
+                    android:textColor="#000" />
+
+                <View
+                    android:id="@+id/v2_s"
+                    android:layout_width="50dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/theme_color"
+                    android:visibility="invisible" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/qwe"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/relativeLayout2"
+        android:background="#EEE" />
+
+    <CheckBox
+        android:id="@+id/cb_choseAll"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/qwe"
+        android:text="全选"
+        android:visibility="gone" />
+
+    <com.zykj.tuannisuoai_seller.utils.MyListView
+        android:id="@+id/listview_colllection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/cb_choseAll"
+        android:layout_marginTop="5dp" />
+
+    <LinearLayout
+        android:id="@+id/ll_operate"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="#ffcc00"
+        android:orientation="horizontal"
+        android:visibility="invisible" >
+
+        <Button
+            android:id="@+id/btn_xiajia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#ffcc00"
+            android:text="下架商品"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#ff9900"
+            android:text="删除"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/theme_grey"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <!-- 导入title -->
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        android:background="@color/white" >
+
+        <TextView
+            android:id="@+id/tv_productPoints_re_TAG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_productPoints_re"
+            android:layout_alignBottom="@+id/tv_productPoints_re"
+            android:layout_toRightOf="@+id/tv_productPoints_re"
+            android:text="分"
+            android:textColor="@color/theme_color"  />
+
+        <ImageView
+            android:id="@+id/iv_product_re"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="21dp"
+            android:src="@drawable/food_1" />
+
+        <TextView
+            android:id="@+id/tv_recorddate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/iv_product_re"
+            android:layout_alignLeft="@+id/iv_product_re"
+            android:textColor="@color/black"
+            android:text="2011-05-01 11:22" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tv_recorddate"
+            android:background="@color/theme_grey" />
+
+        <TextView
+            android:id="@+id/tv_productIntro_re"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_producName_re"
+            android:layout_centerVertical="true"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:visibility="gone"
+            android:text="产品简介产品简介产品简介" />
+
+        <View
+            android:id="@+id/viewvertical"
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignTop="@+id/tv_producName_re"
+            android:layout_toRightOf="@+id/iv_product_re"
+             />
+
+        <TextView
+            android:id="@+id/tv_producName_re"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view1"
+            android:layout_toRightOf="@+id/viewvertical"
+            android:text="产品名称" />
+
+        <TextView
+            android:id="@+id/tv_productPoints_re"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/viewvertical"
+            android:text="800"
+            android:textColor="@color/theme_color" />
+
+    </RelativeLayout>
+
+</LinearLayout>

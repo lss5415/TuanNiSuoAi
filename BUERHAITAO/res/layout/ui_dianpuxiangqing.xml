@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <!-- 导入title -->
+
+        <include layout="@layout/layout_head" />
+
+        <TextView
+            android:id="@+id/tv_storename"
+            style="@style/title_head"
+            android:text="商铺详情"
+            android:textSize="18sp" />
+
+        <ImageButton
+            android:id="@+id/im_storeback"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:background="@null"
+            android:contentDescription="@string/app_name"
+            android:padding="5dp"
+            android:src="@drawable/symbol_left1" />
+
+        <ImageView
+            android:id="@+id/im_storeshoucang"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/storeshoucang" />
+
+        <ImageView
+            android:id="@+id/im_storeshare"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/im_storeshoucang"
+            android:src="@drawable/storeshare" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/index_scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relativeLayout1" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="150dp" >
+                
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent" >
+
+                <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
+                    android:id="@+id/index_viewpage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="top" />
+
+                <LinearLayout
+                    android:id="@+id/gallery_point_linear"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/index_viewpage"
+                    android:layout_alignParentLeft="true"
+                    android:background="#f0eff4"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+                </LinearLayout>
+            </RelativeLayout>
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="55dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:background="#66000000" />
+
+                <ImageView
+                    android:id="@+id/im_xiao_xqback"
+                    android:layout_width="70dp"
+                    android:layout_height="75dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/buerhaitao" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/view1"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/im_xiao_xqback"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_dpxq_storename"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="店铺名称"
+                        android:textColor="#FFF" />
+
+                    <RatingBar
+                        android:id="@+id/rb_dpxiangqing_rating_bar"
+                        style="@style/coupon_Rating_Bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="5dp"
+                        android:stepSize="0.5" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="55dp"
+                android:gravity="right"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:id="@+id/ll_ditudaohang"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="61dp"
+                    android:padding="5dp" >
+
+                    <ImageView
+                        android:layout_width="13dp"
+                        android:layout_height="18dp"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/ditui_icon" />
+
+                    <TextView
+                        android:id="@+id/tv_store_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="8dp"
+                        android:text="山东省临沂市兰山区红旗路金鼎国际904室"
+                        android:textColor="#808080" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#DEDEDE" />
+
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="fill_parent" >
+
+                    <LinearLayout
+                        android:layout_width="60dp"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:id="@+id/im_store_phone"
+                            android:layout_width="30dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/store_phone" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#E4d5E7" />
+        </LinearLayout>
+    </ScrollView>
+    
+
+                <com.ZYKJ.tuannisuoai.view.MyListView
+                    android:id="@+id/lv_store_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_below="@id/index_scroll" >
+                </com.ZYKJ.tuannisuoai.view.MyListView>
+
+</RelativeLayout>

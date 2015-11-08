@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#dedcd2"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp" >
+
+        <EditText
+            android:id="@+id/et_guige"
+            android:layout_width="0.0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:editable="false"
+            android:gravity="center" />
+
+        <EditText
+            android:id="@+id/et_guige1"
+            android:layout_width="0.0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:editable="false"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/et_jiage"
+            android:layout_width="0.0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/et_kucun"
+            android:layout_width="0.0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/et_tejia"
+            android:layout_width="0.0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp" />
+
+</LinearLayout>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/theme_grey">
+        <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <!-- 导入title -->
+
+        <include layout="@layout/layout_head" />
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/title_head"
+            android:text="@string/address" 
+            android:textSize="18sp"/>
+
+        <ImageButton
+            android:id="@+id/address_back"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:background="@null"
+            android:contentDescription="@string/app_name"
+            android:padding="5dp"
+            android:src="@drawable/symbol_left1" />
+    </RelativeLayout>
+
+<com.ZYKJ.tuannisuoai.view.MyListView
+    android:id="@+id/listview_addresManagement"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_below="@+id/relativeLayout1" >
+</com.ZYKJ.tuannisuoai.view.MyListView>
+
+<RelativeLayout
+    android:id="@+id/addNewAddress"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentLeft="true"
+    android:background="@color/white" >
+
+    <Button
+        android:id="@+id/btn_addNewAddress"
+        android:layout_width="180dp"
+        android:layout_height="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/shape_btn_background_yellow"
+        android:textColor="@color/white"
+        android:text="@string/addNewAddress" />
+
+</RelativeLayout>
+
+</RelativeLayout>

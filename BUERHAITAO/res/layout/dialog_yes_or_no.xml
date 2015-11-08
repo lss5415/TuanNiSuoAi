@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_background"
+    android:paddingBottom="20dp"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp"
+    
+     >
+
+    <TextView
+        android:id="@+id/dialog_notic_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/space1"
+        android:layout_alignRight="@+id/space1"
+        android:layout_marginTop="26dp"
+        android:gravity="center_horizontal"
+        android:textSize="16sp"
+        android:text="测试提示框dialog,此处只是为了测试长度"
+        android:textColor="#000" />
+
+ 	<View 
+ 	    android:id="@+id/space1"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_below="@id/dialog_notic_text"
+          />
+ 	<TextView
+	    android:id="@+id/tip"
+	    android:layout_below="@+id/space1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/dialog_notic_text"
+	    android:layout_alignRight="@+id/dialog_notic_text"
+	    android:gravity="center_horizontal"
+	    android:maxEms="10"
+	    android:minEms="10"
+	    android:text="兑换成功后，请在兑换记录里查看你的兑换商品信息"
+	    android:textColor="#000" />
+ 	<View 
+ 	    android:id="@+id/space2"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_below="@id/tip"
+          />
+	<LinearLayout
+	    android:id="@+id/ll_btns"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/space2"
+	    
+	    android:orientation="horizontal" >
+      <Button
+	        android:id="@+id/btn_no"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/shape_btn_background_grey"
+	        android:paddingBottom="5dp"
+	        android:paddingLeft="25dp"
+	        android:paddingRight="25dp"
+	        android:paddingTop="5dp"
+	        android:text="取消"
+	        android:textSize="16sp"
+	        android:textColor="@color/black"
+	        android:layout_weight="1"/>
+     
+	    <Button
+	        android:layout_weight="1"
+	        android:id="@+id/btn_yes"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/shape_btn_background_grey"
+	        android:layout_marginLeft="10dp"
+	        android:paddingBottom="5dp"
+	        android:paddingLeft="25dp"
+	        android:paddingRight="25dp"
+	        android:paddingTop="5dp"
+	        android:textSize="16sp"
+	        android:text="确认"
+	        android:textColor="@color/blue" />
+	</LinearLayout>
+
+	
+
+</RelativeLayout>
