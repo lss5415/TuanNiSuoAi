@@ -120,14 +120,31 @@
             android:textSize="20sp" />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/tv_forgetPassWord"
-        android:layout_width="wrap_content"
+    <LinearLayout 
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
-        android:onClick="forgetPassWord"
-        android:text="@string/forgetPassWord"
-        android:textColor="@color/theme_color" />
+        android:orientation="horizontal"
+		android:layout_marginTop="25dp"
+        android:gravity="center">
+        <ImageView 
+            android:id="@+id/login_tv"
+	        android:layout_width="50dp"
+	        android:layout_height="50dp"
+	        android:background="@drawable/login_qq_logo"/>
+        <ImageView 
+            android:id="@+id/login_tv2"
+	        android:layout_width="50dp"
+	        android:layout_height="50dp"
+	        android:layout_marginLeft="15dp"
+	        android:background="@drawable/login_wechat_logo"/>
+	    <TextView
+	        android:id="@+id/tv_forgetPassWord"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="15dp"
+	        android:onClick="forgetPassWord"
+	        android:text="@string/forgetPassWord"
+	        android:textColor="@color/theme_color" />
+    </LinearLayout>
 
 </LinearLayout>
