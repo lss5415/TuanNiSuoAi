@@ -87,6 +87,7 @@ public class B4_StoreActivity extends BaseActivity implements IXListViewListener
 		ly_a4_assess = (LinearLayout)findViewById(R.id.ly_a4_assess);
 		tv_a4_assess = (TextView)findViewById(R.id.tv_a4_assess);
 		tv_a4_category = (TextView)findViewById(R.id.tv_a4_category);
+		cl_address.setText(getSharedPreferenceValue("cityname"));
 		
         a4_storelist.setPullLoadEnable(true);
         a4_storelist.setPullRefreshEnable(true);

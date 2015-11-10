@@ -66,6 +66,7 @@ public class B2_ClassifyActivity extends BaseActivity{
 		product_grid = (GridView)findViewById(R.id.product_grid);
 		rl_sousuokuang = (RelativeLayout)findViewById(R.id.rl_sousuokuang);
 		search_input = (EditText)findViewById(R.id.search_input);
+		cl_address.setText(getSharedPreferenceValue("cityname"));
         mRadioParams = new RadioGroup.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
 		setListener(cl_address,rl_sousuokuang,search_input);

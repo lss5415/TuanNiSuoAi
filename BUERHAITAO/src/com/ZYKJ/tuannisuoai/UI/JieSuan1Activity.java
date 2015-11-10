@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,6 +67,8 @@ public class JieSuan1Activity extends BaseActivity {
 	private String pay_sn;
 	private int check = 0;
 	private ImageView im_uncheck, im_check;
+	private LinearLayout ll_dizhi;
+	private int GetAddress=1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +92,7 @@ public class JieSuan1Activity extends BaseActivity {
 		im_check = (ImageView) findViewById(R.id.im_check);
 		tv_zffs = (TextView) findViewById(R.id.tv_zffs);
 		allpri = getIntent().getStringExtra("allpri");
+		ll_dizhi = (LinearLayout)findViewById(R.id.ll_dizhi);
 		key = getSharedPreferenceValue("key");
 		tv_sumgoods1.setText(allpri);
 		xzhdgg = getIntent().getStringExtra("xzhdgg") + "|1";
@@ -101,7 +105,7 @@ public class JieSuan1Activity extends BaseActivity {
 		listview.setRefreshTime();
 
 		setListener(im_jiesuan_back, rl_zhifufangshi, tv_jiesuanqueren,
-				im_uncheck, im_check);
+				im_uncheck, im_check,ll_dizhi);
 	}
 
 	@Override
@@ -263,6 +267,11 @@ public class JieSuan1Activity extends BaseActivity {
 			im_uncheck.setVisibility(View.VISIBLE);
 			im_check.setVisibility(View.GONE);
 			check = 0;
+			break;
+		case R.id.ll_dizhi:
+			Intent i_tochoseAddress = new Intent(JieSuan1Activity.this,B5_9_MyAddressManagement.class);
+			i_tochoseAddress.putExtra("ChoseAddress", true);
+			startActivityForResult(i_tochoseAddress, GetAddress);
 			break;
 		default:
 			break;
@@ -522,6 +531,12 @@ public class JieSuan1Activity extends BaseActivity {
 				}
 			} else if (resultCode == Activity.RESULT_CANCELED) {
 				Tools.Notic(this, "支付取消", null);
+			}else if (resultCode==GetAddress) {
+				address_id=data.getStringExtra("address_id");
+				tv_buyer_name.setText("姓名:"+data.getStringExtra("true_name"));
+				tv_buyer_number.setText("  电话:"+data.getStringExtra("mob_phone"));
+				tv_buyer_address.setText("地址:"+data.getStringExtra("area_info")+data.getStringExtra("address"));
+//				tv_address.setText("姓名:"+data.getStringExtra("true_name")+"  电话:"+data.getStringExtra("mob_phone")+"\n"+data.getStringExtra("area_info")+data.getStringExtra("address"));
 			}
 		}
 	}
