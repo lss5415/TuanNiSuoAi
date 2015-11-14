@@ -133,7 +133,8 @@
         </activity>
         <activity android:name="com.ZYKJ.tuannisuoai.UI.B3_ShoppingJieSuan" >
         </activity>
-        <activity android:name="com.ZYKJ.tuannisuoai.UI.JieSuanActivity" >
+        <activity android:name="com.ZYKJ.tuannisuoai.UI.JieSuanActivity" 
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity android:name="com.ZYKJ.tuannisuoai.UI.JieSuan1Activity" >
         </activity>
