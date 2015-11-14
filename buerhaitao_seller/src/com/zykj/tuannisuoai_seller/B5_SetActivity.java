@@ -64,7 +64,7 @@ public class B5_SetActivity extends BaseActivity{
 			}
 			break;
 		case R.id.aboutus://关于我们
-			Tools.Notic(this, "团你所爱卖家版", null);
+			Tools.Notic(this, "团你所爱是临沂都始电子商务有限公司推出，“足不出户，逛遍全城”的购物理念。领先全城团购市场，零风险、高品质超低折扣。打造最受欢迎的生活休闲娱乐购物平台。", null);
 			break;
 		case R.id.aboutapp://关于app
 			Tools.Notic(this, "团你所爱卖家版app", null);
