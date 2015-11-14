@@ -96,6 +96,7 @@
         android:layout_height="fill_parent" >
 
         <LinearLayout
+            android:id="@+id/bottom"
             android:layout_width="fill_parent"
             android:layout_height="100dp"
             android:layout_alignParentBottom="true"
@@ -215,12 +216,13 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <com.ZYKJ.tuannisuoai.view.MyListView
+        <com.ZYKJ.tuannisuoai.view.MyExpandableListView 
             android:id="@+id/list_shoppingcar1"
+            android:layout_above="@id/bottom"
+            android:descendantFocusability="beforeDescendants"
+        	android:focusableInTouchMode="true"
+        	android:choiceMode="singleChoice"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp" >
-        </com.ZYKJ.tuannisuoai.view.MyListView>
+            android:layout_height="match_parent"/>
     </RelativeLayout>
-
 </LinearLayout>

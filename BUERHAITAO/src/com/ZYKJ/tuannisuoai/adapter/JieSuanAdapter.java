@@ -1,154 +1,205 @@
 package com.ZYKJ.tuannisuoai.adapter;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.app.Activity;
+import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ZYKJ.tuannisuoai.R;
+import com.ZYKJ.tuannisuoai.data.CarJieSuan;
 import com.ZYKJ.tuannisuoai.view.UIDialog;
-import com.google.gson.Gson;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.ta.utdid2.android.utils.StringUtils;
 
-public class JieSuanAdapter extends BaseAdapter {
+public class JieSuanAdapter extends BaseExpandableListAdapter {
 
-	List<Map<String, Object>> data1 = new ArrayList<Map<String, Object>>();
-	List<Map<String, String>> data = new ArrayList<Map<String, String>>();
-	private Activity c;
-	String key;
-	JieSuanShangPinAdapter adapter;
+	private JSONArray datas;
+	private Context context;
+	private LayoutInflater inflater;
+	private List<CarJieSuan> object;
 
-	public JieSuanAdapter(Activity c, List<Map<String, Object>> data1,
-			List<Map<String, String>> data, String key) {
-		this.c = c;
-		this.data = data;
-		this.data1 = data1;
-		this.key = key;
+	public JieSuanAdapter(Context context, JSONArray datas, List<CarJieSuan> object) {
+		this.datas = datas;
+		this.context = context;
+		this.object = object;
+        inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
 	@Override
-	public int getCount() {
-		// TODO Auto-generated method stub
-		return data == null ? 0 : data.size();
+	public JSONObject getChild(int groupPosition, int childPosition) {
+		JSONObject jsonParent = datas.getJSONObject(groupPosition);
+		return jsonParent.getJSONArray("goods_list").getJSONObject(childPosition);
 	}
 
 	@Override
-	public Object getItem(int arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public long getChildId(int groupPosition, int childPosition) {
+		return childPosition;
 	}
-
+	
 	@Override
-	public long getItemId(int arg0) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public View getView(int position, View convertView, ViewGroup arg2) {
-		ViewHolder viewHolder = null;
-		if (null == convertView) {
-			viewHolder = new ViewHolder();
-			LayoutInflater mInflater = LayoutInflater.from(c);
-			convertView = mInflater.inflate(R.layout.ui_jiesuan_list_items,
-					null);
-			viewHolder.tv_storejsname = (TextView) convertView
-					.findViewById(R.id.tv_storejsname);
-			viewHolder.listview_jiesuanlist = (ListView) convertView
-					.findViewById(R.id.listview_jiesuanlist);
-			viewHolder.rl_peisongfangshi = (RelativeLayout) convertView
-					.findViewById(R.id.rl_peisongfangshi);
-			viewHolder.et_liuyan = (EditText) convertView
-					.findViewById(R.id.et_liuyan);
-			viewHolder.tv_price = (TextView) convertView
-					.findViewById(R.id.tv_price);
-			viewHolder.tv_shangpinshu = (TextView) convertView
-					.findViewById(R.id.tv_shangpinshu);
-			viewHolder.tv_psfs = (TextView) convertView
-					.findViewById(R.id.tv_psfs);
-
-			convertView.setTag(viewHolder);
-		} else {
-			viewHolder = (ViewHolder) convertView.getTag();
+	public View getChildView(final int groupPosition, int childPosition,boolean isLastChild, View convertView, final ViewGroup parent) {
+		JSONObject jsonParent = datas.getJSONObject(groupPosition);//店铺
+		JSONObject jsonChild = jsonParent.getJSONArray("goods_list").getJSONObject(childPosition);//商品
+		final HolderChild viewHolder;
+        if (null == convertView){
+            viewHolder = new HolderChild();
+            convertView = inflater.inflate(R.layout.ui_goodsjiesuan_list_items, null);
+            viewHolder.childrenNameTV = (TextView) convertView.findViewById(R.id.children_name1);
+			viewHolder.im_shangpuimg = (ImageView) convertView.findViewById(R.id.im_shangpuimg1);
+			viewHolder.tv_spec = (TextView) convertView.findViewById(R.id.tv_spec1);
+			viewHolder.tv_goods_price = (TextView) convertView.findViewById(R.id.tv_goods_price1);
+			viewHolder.tv_goods_num = (TextView) convertView.findViewById(R.id.tv_goods_num1);
+			//配送方式
+			viewHolder.rl_peisongfangshi = (RelativeLayout) convertView.findViewById(R.id.rl_peisongfangshi);//点击配送
+			viewHolder.tv_price = (TextView) convertView.findViewById(R.id.tv_price);//总价格
+			viewHolder.tv_shangpinshu = (TextView) convertView.findViewById(R.id.tv_shangpinshu);//数量
+			viewHolder.tv_psfs = (TextView) convertView.findViewById(R.id.tv_psfs);//配送方式
+			viewHolder.et_liuyan = (EditText) convertView.findViewById(R.id.et_liuyan);//留言
+			viewHolder.et_liuyan.setTag(groupPosition);
+			class MyTextWatcher implements TextWatcher {  
+                private HolderChild mHolder; 
+                public MyTextWatcher(HolderChild holder) {  
+                    mHolder = holder;  
+                }   
+                @Override  
+                public void onTextChanged(CharSequence s, int start,  
+                        int before, int count) {  
+                }  
+                @Override  
+                public void beforeTextChanged(CharSequence s, int start,  
+                        int count, int after) {  
+                }  
+                @Override  
+                public void afterTextChanged(Editable s) {  
+                    if (s != null && !"".equals(s.toString())) {  
+                        int position = (Integer) mHolder.et_liuyan.getTag();  
+                        object.get(position).setMessage(s.toString());// 当EditText数据发生改变的时候存到data变量中  
+                    }  
+                }  
+            }  
+			viewHolder.et_liuyan.addTextChangedListener(new MyTextWatcher(viewHolder)); 
+            convertView.setTag(viewHolder);
+        }else{
+            viewHolder = (HolderChild) convertView.getTag();
+            viewHolder.et_liuyan.setTag(groupPosition);
+        }
+		String goods_image_url = jsonChild.getString("goods_image_url");
+		ImageLoader.getInstance().displayImage(goods_image_url, viewHolder.im_shangpuimg);//设置商品图片
+		viewHolder.childrenNameTV.setText(jsonChild.getString("goods_name"));//设置商品名称
+		viewHolder.tv_goods_price.setText("￥"+jsonChild.getString("goods_price"));//设置商品价格
+		viewHolder.tv_goods_num.setText("X"+jsonChild.getString("goods_num"));//设置商品数量
+		viewHolder.tv_price.setText(jsonParent.getString("store_goods_total"));//店铺总价
+		viewHolder.tv_shangpinshu.setText("共"+jsonParent.getJSONArray("goods_list").size()+"件商品    合计：");//几件商品
+//		viewHolder.et_liuyan.setText(object.get(groupPosition).getMessage());//留言
+		String freight_price = StringUtils.isEmpty(jsonParent.getString("store_freight_price"))?"0.00":jsonParent.getString("store_freight_price");
+		viewHolder.tv_psfs.setText("自提".equals(object.get(groupPosition).getDlyoPickupType())?"自提":"物流配送(配送费："+freight_price+")");
+		if(jsonChild.getJSONObject("goods_spec") != null){
+			String spe = jsonChild.getJSONObject("goods_spec").values().toString();
+			viewHolder.tv_spec.setText(spe.substring(1,spe.length()-1));
 		}
-
-		viewHolder.tv_storejsname.setText(data.get(position).get("store_name")
-				.toString());// 店铺名
-		viewHolder.tv_price.setText(data.get(position).get("store_goods_total")
-				.toString());
-		Gson gson = new Gson();
-		String jsa = gson.toJson(data1.get(position).get("goods_list"));
-		try {
-			JSONObject dataJson = new JSONObject(jsa);
-			org.json.JSONArray array = dataJson.getJSONArray("values");
-			adapter = new JieSuanShangPinAdapter(c,array);
-			viewHolder.listview_jiesuanlist.setAdapter(adapter);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// String jsonStr = gson.toJson(data1.get(position).get("goods_list"));
-		// JSONObject jobdata = (JSONObject)
-		// data1.get(position).get("goods_list");
-
-		// adapter = new JieSuanShangPinAdapter(c,jsonStr);
-		// viewHolder.listview_jiesuanlist.setAdapter(adapter);
-		viewHolder.rl_peisongfangshi
-				.setOnClickListener(new PeiSongFangShiOnClickListener(
-						viewHolder));
+		convertView.findViewById(R.id.ll_peisongliuyan).setVisibility(isLastChild?View.VISIBLE:View.GONE);
+		viewHolder.rl_peisongfangshi.setOnClickListener(new PeiSongFangShiOnClickListener(viewHolder, groupPosition, freight_price));
+		viewHolder.et_liuyan.requestFocus();  
 		return convertView;
 	}
 
-	private static class ViewHolder {
-		TextView tv_storejsname;
-		ListView listview_jiesuanlist;
+	@Override
+	public int getChildrenCount(int groupPosition) {
+		JSONObject jsonParent = datas.getJSONObject(groupPosition);//店铺
+		return jsonParent.getJSONArray("goods_list").size();
+	}
+
+	@Override
+	public JSONObject getGroup(int groupPosition) {
+		return datas.getJSONObject(groupPosition);
+	}
+
+	@Override
+	public int getGroupCount() {
+		return datas.size();
+	}
+
+	@Override
+	public long getGroupId(int groupPosition) {
+		return groupPosition;
+	}
+
+	@Override
+	public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+		if (convertView == null) {
+			convertView = inflater.inflate(R.layout.group_jiesuan_item, null);
+		}
+		TextView tv = (TextView) convertView.findViewById(R.id.group_name);
+		tv.setText(datas.getJSONObject(groupPosition).getString("store_name"));
+		return convertView;
+	}
+
+	@Override
+	public boolean hasStableIds() {
+		return false;
+	}
+
+	@Override
+	public boolean isChildSelectable(int arg0, int arg1) {
+		return true;
+	}
+
+//	final static class HolderParent {
+//		TextView groupNameTV;
+//	}
+
+	private class HolderChild{
+		TextView childrenNameTV;
+		ImageView im_shangpuimg;
+		TextView tv_spec;
+		TextView tv_goods_price;
+		TextView tv_goods_num;
+
 		RelativeLayout rl_peisongfangshi;
 		EditText et_liuyan;
 		TextView tv_price;
 		TextView tv_shangpinshu;
 		TextView tv_psfs;
-	}
+    }
 
 	class PeiSongFangShiOnClickListener implements View.OnClickListener {
-		ViewHolder viewHolder;
-
-		public PeiSongFangShiOnClickListener(ViewHolder viewHolder) {
+		private HolderChild viewHolder;
+		private String freight_price;
+		private int position;
+		public PeiSongFangShiOnClickListener(HolderChild viewHolder, int position, String freight_price) {
 			this.viewHolder = viewHolder;
+			this.freight_price = freight_price;
+			this.position = position;
 		}
-
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
 			switch (v.getId()) {
 			case R.id.rl_peisongfangshi:
-				UIDialog.ForThreeBtn(c, new String[] { "物流配送", "自提", "取消" },
-						this);
+				UIDialog.ForThreeBtn(context, new String[] {"物流配送(配送费："+freight_price+")", "自提", "取消" }, this);
 				break;
 			case R.id.dialog_modif_1:
 				UIDialog.closeDialog();
-				viewHolder.tv_psfs.setText("物流配送");
-
+				viewHolder.tv_psfs.setText("物流配送(配送费："+freight_price+")");
+				object.get(position).setDlyoPickupType("物流配送");
 				break;
 			case R.id.dialog_modif_2:
 				UIDialog.closeDialog();
 				viewHolder.tv_psfs.setText("自提");
-
+				object.get(position).setDlyoPickupType("自提");
 				break;
 			case R.id.dialog_modif_3:
 				UIDialog.closeDialog();
-				viewHolder.tv_psfs.setText("");
-
 				break;
 			default:
 				break;

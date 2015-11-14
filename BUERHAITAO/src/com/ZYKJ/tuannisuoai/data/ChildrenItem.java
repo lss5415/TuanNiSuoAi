@@ -21,6 +21,8 @@ public class ChildrenItem {
 	private String goods_image_url;
 	private String goods_sum;
 	private String goods_total;
+	
+	private boolean isChecked;//是否选中
 
 	public ChildrenItem() {
 	}
@@ -204,7 +206,15 @@ public class ChildrenItem {
 	public void setGoods_total(String goods_total) {
 		this.goods_total = goods_total;
 	}
-	
-	
+
+
+	public boolean isChecked() {
+		return isChecked;
+	}
+
+
+	public void setChecked(boolean isChecked) {
+		this.isChecked = isChecked;
+	}
 	
 }

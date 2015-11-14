@@ -11,6 +11,9 @@ public class GroupItem {
 	private String store_id;
 	private String store_name;
 	private List<ChildrenItem> store_list;
+
+	private boolean isChecked;//是否选中
+	private boolean isSelected;//是否编辑
 	
 	
 	public GroupItem() {
@@ -51,7 +54,20 @@ public class GroupItem {
 		this.store_name = store_name;
 	}
 
-	
-	
-	
+	public boolean isChecked() {
+		return isChecked;
+	}
+
+	public void setChecked(boolean isChecked) {
+		this.isChecked = isChecked;
+	}
+
+	public boolean isSelected() {
+		return isSelected;
+	}
+
+	public void setSelected(boolean isSelected) {
+		this.isSelected = isSelected;
+	}
+
 }

@@ -5,71 +5,196 @@
     android:background="#FFF"
     android:orientation="vertical" >
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_margin="10dp" >
+
+        <ImageView
+            android:id="@+id/im_shangpuimg1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/food_1" />
+
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="100dp"
-            android:layout_marginLeft="10dp" >
-
-            <ImageView
-                android:id="@+id/im_shangpuimg1"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/buerhaitao" />
+            android:layout_height="fill_parent" >
 
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" >
+                android:id="@+id/ll_b3shopmoren"
+                android:layout_width="0.0dp"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="2"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/children_name1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.0dp"
+                    android:layout_weight="1"
+                    android:text="商品名称" />
+
+                <TextView
+                    android:id="@+id/tv_spec1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.0dp"
+                    android:layout_weight="1"
+                    android:text="规格：" />
+            </LinearLayout>
+            
 
                 <LinearLayout
-                    android:id="@+id/ll_b3shopmoren"
                     android:layout_width="0.0dp"
                     android:layout_height="fill_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:orientation="vertical" >
 
                     <TextView
-                        android:id="@+id/children_name1"
+                        android:id="@+id/tv_goods_price1"
                         android:layout_width="wrap_content"
-                        android:layout_height="0.0dp"
-                        android:layout_weight="1"
-                        android:text="商品名称" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="5dp"
+                        android:text="￥52123.51"
+                        android:textColor="#000" />
 
                     <TextView
-                        android:id="@+id/tv_spec1"
+                        android:id="@+id/tv_goods_num1"
                         android:layout_width="wrap_content"
-                        android:layout_height="0.0dp"
-                        android:layout_weight="1"
-                        android:text="规格：" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_gravity="right"
+                        android:text="x1"
+                        android:textColor="#F10583" />
                 </LinearLayout>
-                
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_peisongliuyan"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFF"
+        android:visibility="gone"
+        android:orientation="vertical" >
 
-                    <LinearLayout
-                        android:layout_width="0.0dp"
-                        android:layout_height="fill_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical" >
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#DADADA" />
 
-                        <TextView
-                            android:id="@+id/tv_goods_price1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:layout_marginRight="5dp"
-                            android:text="￥52123.51"
-                            android:textColor="#000" />
+        <RelativeLayout
+            android:id="@+id/rl_peisongfangshi"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp" >
 
-                        <TextView
-                            android:id="@+id/tv_goods_num1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="5dp"
-                            android:layout_gravity="right"
-                            android:text="x1"
-                            android:textColor="#FF5500" />
-                    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="配送方式" />
+
+            <TextView
+                android:id="@+id/tv_psfs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="30dp"
+                android:text="物流配送" />
+            <ImageView 
+                    android:layout_width="10dp"
+                    android:layout_height="17dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/a4_searchdown"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#DADADA" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="50dp">
+
+                <EditText
+                    android:id="@+id/et_liuyan"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#E8E8E8"
+                    android:hint="给卖家留言："
+                    android:inputType="text"
+                    android:paddingLeft="5dp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#DADADA" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp" >
+
+                    <TextView
+                        android:id="@+id/tv_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:text="23452"
+                        android:textColor="#000"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/tasa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toLeftOf="@id/tv_price"
+                        android:textColor="#000"
+                        android:textSize="16sp"
+                        android:text="￥" />
+
+                    <TextView
+                        android:id="@+id/tv_shangpinshu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toLeftOf="@id/tasa"
+                        android:text="共1件商品：合计：" />
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
-
+    </LinearLayout>
 </LinearLayout>

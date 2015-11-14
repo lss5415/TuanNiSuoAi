@@ -1381,6 +1381,11 @@ public class HttpUtils {
 		params.put("client_type", client_type);
 		client.post(url, params,res);
 	}
+	//////csh/////////csh////////////csh//////////////csh/////csh/////csh////////csh/////////csh///////////csh//////////////csh//////////////////////
+	public static void getBuySecond(AsyncHttpResponseHandler res, RequestParams params) {
+		String url = base_url + "index.php?act=member_buy&op=buy_step2";
+		client.post(url, params,res);
+	}
 	
 	/**
 	 *  收藏添加

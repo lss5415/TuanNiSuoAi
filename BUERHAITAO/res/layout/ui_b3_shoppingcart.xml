@@ -39,7 +39,7 @@
                     android:id="@+id/im_checkall"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:src="@drawable/ck_unchecked" />
+                    android:src="@drawable/checkbox_style2" />
             </LinearLayout>
 
             <TextView
@@ -59,7 +59,7 @@
                     android:layout_width="120dp"
                     android:layout_height="fill_parent"
                     android:layout_alignParentRight="true"
-                    android:background="#FF5500"
+                    android:background="#F10583"
                     android:gravity="center"
                     android:text="结算（0）"
                     android:textColor="#FFF"
@@ -88,8 +88,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:layout_marginRight="3dp"
                             android:text="￥"
-                            android:textColor="#FF5500" />
+                            android:textColor="#F10583" />
 
                         <TextView
                             android:id="@+id/tv_sumgoods"
@@ -98,7 +99,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="3dp"
                             android:text="0.00"
-                            android:textColor="#FF5500" />
+                            android:textColor="#F10583" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -119,16 +120,15 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_above="@id/gwcdb" >
-
             <ExpandableListView
                 android:id="@+id/list_shoppingcar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-        </LinearLayout>
+        </RelativeLayout>
     </RelativeLayout>
 
 </LinearLayout>

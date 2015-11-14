@@ -23,8 +23,7 @@
                 android:layout_height="wrap_content" 
 	       		android:scaleX="0.55"
 	       		android:scaleY="0.55"
-	        	android:button="@drawable/checkbox_style1"
-                android:focusable="false"/>
+	        	android:button="@drawable/checkbox_style1"/>
         </LinearLayout>
 
         <LinearLayout
@@ -36,7 +35,7 @@
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/buerhaitao" />
+                android:src="@drawable/food_1" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -49,7 +48,7 @@
                     android:layout_height="fill_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical" >
 
                     <TextView
                         android:id="@+id/children_name"
@@ -57,9 +56,8 @@
                         android:layout_height="0.0dp"
                         android:layout_weight="1.5"
                         android:maxLines="2"
-						android:ellipsize="end"
+                        android:ellipsize="end"
                         android:text="沙发水电费水电费三分玩儿玩儿玩儿" />
-
 
                     <TextView
                         android:id="@+id/tv_spec"
@@ -81,14 +79,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="￥"
-                            android:textColor="#FF5500" />
+                            android:textColor="#F10583" />
 
                         <TextView
                             android:id="@+id/tv_goods_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="52.5"
-                            android:textColor="#FF5500" />
+                            android:textColor="#F10583" />
 						</LinearLayout>
 
                         <TextView
@@ -99,7 +97,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginRight="5dp"
                             android:text="x1"
-                            android:textColor="#FF5500" />
+                            android:textColor="#F10583" />
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -107,7 +105,7 @@
                     android:id="@+id/ll_b3shopedit"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_marginLeft="5dp" 
+                    android:layout_marginLeft="5dp"
                     android:visibility="gone" >
 
                     <LinearLayout
@@ -136,15 +134,16 @@
                                     android:text="-" >
                                 </Button>
 
-                                <EditText
+                                <TextView
                                     android:id="@+id/editconunt"
                                     android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:layout_weight="1"
-                                    android:editable="false"
-                                    android:text="0" >
-                                </EditText>
+                                    android:textSize="16sp"
+                                    android:gravity="center_horizontal"
+                                    android:text="22" >
+                                </TextView>
 
                                 <Button
                                     android:id="@+id/jiabt"
