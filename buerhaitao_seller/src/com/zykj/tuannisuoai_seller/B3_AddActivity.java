@@ -1,12 +1,12 @@
 package com.zykj.tuannisuoai_seller;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.http.Header;
 import org.json.JSONException;
@@ -15,6 +15,9 @@ import org.json.JSONObject;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -28,12 +31,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.zykj.tuannisuoai_seller.R;
 import com.zykj.tuannisuoai_seller.adapter.GridAdapter;
 import com.zykj.tuannisuoai_seller.adapter.GridAdapter.SaveModel;
 import com.zykj.tuannisuoai_seller.base.BaseActivity;
 import com.zykj.tuannisuoai_seller.utils.AutoListView;
 import com.zykj.tuannisuoai_seller.utils.HttpUtils;
+import com.zykj.tuannisuoai_seller.utils.RequestDailog;
 import com.zykj.tuannisuoai_seller.utils.Tools;
 import com.zykj.tuannisuoai_seller.utils.UIDialog;
 
@@ -69,8 +72,19 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 	private EditText et_chanpinming, et_chanpinjianjie;
 	List<XingHaoModel> datamodel = new ArrayList<XingHaoModel>();
 	int state = 0;// 默认=0，型号1 state=1,型号2 state=2,型号12 state = 3
-	ImageView img_1, img_2, img_3, img_4, img_5;
-	String tupian = "04920800982552959.jpg";
+	ImageView iv_1,iv_2,iv_3, iv_4, iv_5;
+//	String tupian = "04920800982552959.jpg";
+	String tupian1 = "04920800982552959.jpg";
+	String imageString="";
+	Bitmap photo;
+	int first = 0; //第一次上传图片
+	String imageString1="";
+	int setImageTag = 0;
+	private static final int IV_1 = 201;
+	private static final int IV_2 = 202;
+	private static final int IV_3 = 203;
+	private static final int IV_4 = 204;
+	private static final int IV_5 = 205;
 
 	/**
 	 * 上传头像的字段
@@ -104,17 +118,17 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 		tv_save = (TextView) findViewById(R.id.tv_save);
 		et_chanpinming = (EditText) findViewById(R.id.et_chanpinming);
 		et_chanpinjianjie = (EditText) findViewById(R.id.et_chanpinjianjie);
-		img_1 = (ImageView) findViewById(R.id.img_1);
-		img_2 = (ImageView) findViewById(R.id.img_2);
-		img_3 = (ImageView) findViewById(R.id.img_3);
-		img_4 = (ImageView) findViewById(R.id.img_4);
-		img_5 = (ImageView) findViewById(R.id.img_5);
+		iv_1 = (ImageView) findViewById(R.id.img_1);
+		iv_2 = (ImageView) findViewById(R.id.img_2);
+		iv_3 = (ImageView) findViewById(R.id.img_3);
+		iv_4 = (ImageView) findViewById(R.id.img_4);
+		iv_5 = (ImageView) findViewById(R.id.img_5);
 
 		// setListViewHeightBasedOnChildren(lv_grid);
 
 		key = getSharedPreferenceValue("key");
-		setListener(rl_fenlei, ll_xh1, ll_xh2, tv_scbg, tv_save, img_1, img_2,
-				img_3, img_4, img_5);
+		setListener(rl_fenlei, ll_xh1, ll_xh2, tv_scbg, tv_save, iv_1, iv_2,
+				iv_3, iv_4, iv_5);
 	}
 
 	public void onClick(View v) {
@@ -298,8 +312,8 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 					String g_storage = datamodel.get(0).getKucun();
 					String goods_jingle = et_chanpinjianjie.getText()
 							.toString();
-					String image_path = tupian;
-					String image_all = tupian + "," + tupian;
+					String image_path = imageString1;
+					String image_all = imageString;
 					// lv_grid.
 					HttpUtils.ShangPinFaBu(res_Fabu, key, cate_id, cate_name,
 							g_name, g_price, goods_promotion_price, g_storage,
@@ -352,8 +366,8 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 					// String g_storage = datamodel.get(0).getKucun();
 					String goods_jingle = et_chanpinjianjie.getText()
 							.toString();
-					String image_path = tupian;
-					String image_all = tupian + "," + tupian;
+					String image_path = imageString1;
+					String image_all = imageString;
 					HttpUtils.ShangPinFaBu1(res_Fabu, key,cate_id,cate_name,g_name,sp_name,sp_value,spec,goods_jingle,image_path,image_all);
 				} else if (state == 2) {
 //					Toast.makeText(getApplicationContext(), "型号2",Toast.LENGTH_LONG).show();
@@ -402,8 +416,8 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 					// String g_storage = datamodel.get(0).getKucun();
 					String goods_jingle = et_chanpinjianjie.getText()
 							.toString();
-					String image_path = tupian;
-					String image_all = tupian + "," + tupian;
+					String image_path = imageString1;
+					String image_all = imageString;
 					HttpUtils.ShangPinFaBu1(res_Fabu, key,cate_id,cate_name,g_name,sp_name,sp_value,spec,goods_jingle,image_path,image_all);
 				} else if (state == 3) {
 //					Toast.makeText(getApplicationContext(), "多个型号",Toast.LENGTH_LONG).show();
@@ -462,8 +476,8 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 					// String g_storage = datamodel.get(0).getKucun();
 					String goods_jingle = et_chanpinjianjie.getText()
 							.toString();
-					String image_path = tupian;
-					String image_all = tupian + "," + tupian;
+					String image_path = imageString1;
+					String image_all = imageString;
 					HttpUtils.ShangPinFaBu1(res_Fabu, key,cate_id,cate_name,g_name,sp_name,sp_value,spec,goods_jingle,image_path,image_all);
 				}
 			}
@@ -513,18 +527,23 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 			break;
 		case R.id.img_1:
 			// HttpUtils.ShangPinFaBu(res_getGuiGeList, key,cate_id);
+			setImageTag = IV_1;
 			UIDialog.ForThreeBtn(this, new String[] { "相册", "拍照", "取消" }, this);
 			break;
 		case R.id.img_2:
+			setImageTag = IV_2;
 			UIDialog.ForThreeBtn(this, new String[] { "相册", "拍照", "取消" }, this);
 			break;
 		case R.id.img_3:
+			setImageTag = IV_3;
 			UIDialog.ForThreeBtn(this, new String[] { "相册", "拍照", "取消" }, this);
 			break;
 		case R.id.img_4:
+			setImageTag = IV_4;
 			UIDialog.ForThreeBtn(this, new String[] { "相册", "拍照", "取消" }, this);
 			break;
 		case R.id.img_5:
+			setImageTag = IV_5;
 			UIDialog.ForThreeBtn(this, new String[] { "相册", "拍照", "取消" }, this);
 			break;
 
@@ -825,27 +844,83 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 	};
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		switch (resultCode) { // resultCode为回传的标记，我在B中回传的是RESULT_OK
-		case RESULT_OK:
+		if (resultCode==-1) {
+			try {
+				gc_id = data.getStringExtra("gc_id");
+				gc_name = data.getStringExtra("gc_name");
+				if (gc_name == null || gc_name == "") {
 
-			/*
-			 * Bundle b=data.getExtras(); //data为B中回传的Intent
-			 * gc_id=b.getString("gc_id");//str即为回传的值
-			 * gc_name=b.getString("gc_name");//str即为回传的值
+				} else {
+					TextView06.setText(gc_name);
+				}
+			} catch (Exception e) {
+				
+			}
+		}
+		switch (requestCode) { // resultCode为回传的标记，我在B中回传的是RESULT_OK
+		case XIANGCE:
+			try {
+				startPhotoZoom(data.getData());
+			} catch (Exception e) {
+				// TODO: handle exception
+				Toast.makeText(this, "您没有选择任何照片", Toast.LENGTH_LONG)
+						.show();
+			}
+			break;
+			// 如果是调用相机拍照时
+		case PAIZHAO:
+			// File temp = new File(Environment.getExternalStorageDirectory()
+			// + "/xiaoma.jpg");
+			// 给图片设置名字和路径
+			File temp = new File(Environment.getExternalStorageDirectory()
+					.getPath() + "/DCIM/Camera/" + timeString + ".jpg");
+			startPhotoZoom(Uri.fromFile(temp));
+			break;
+			// 取得裁剪后的图片
+		case CAIJIAN:
+			/**
+			 * 非空判断大家一定要验证，如果不验证的话， 在剪裁之后如果发现不满意，要重新裁剪，丢弃
+			 * 当前功能时，会报NullException，小马只 在这个地方加下，大家可以根据不同情况在合适的 地方做判断处理类似情况
+			 * 
 			 */
-			gc_id = data.getStringExtra("gc_id");
-			gc_name = data.getStringExtra("gc_name");
-			if (gc_name == null || gc_name == "") {
-
-			} else {
-				TextView06.setText(gc_name);
+			if (data != null) {
+				setPicToView(data);
 			}
 			break;
 		default:
 			break;
 		}
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 
+	//*****************************onActivityResult操作     end******************************************
+	//*****************************图像处理操作     begin******************************************
+		/**
+		 * 裁剪图片方法实现
+		 * 
+		 * @param uri
+		 */
+		public void startPhotoZoom(Uri uri) {
+			/*
+			 * 至于下面这个Intent的ACTION是怎么知道的，大家可以看下自己路径下的如下网页
+			 * yourself_sdk_path/docs/reference/android/content/Intent.html
+			 * 直接在里面Ctrl+F搜：CROP ，之前小马没仔细看过，其实安卓系统早已经有自带图片裁剪功能, 是直接调本地库的，小马不懂C C++
+			 * 这个不做详细了解去了，有轮子就用轮子，不再研究轮子是怎么 制做的了...吼吼
+			 */
+			Intent intent = new Intent("com.android.camera.action.CROP");
+			intent.setDataAndType(uri, "image/*");
+			// 下面这个crop=true是设置在开启的Intent中设置显示的VIEW可裁剪
+			intent.putExtra("crop", "true");
+			// aspectX aspectY 是宽高的比例
+			intent.putExtra("aspectX", 1);
+			intent.putExtra("aspectY", 1);
+			// outputX outputY 是裁剪图片宽高
+			intent.putExtra("outputX", 150);
+			intent.putExtra("outputY", 150);
+			intent.putExtra("return-data", true);
+			startActivityForResult(intent, CAIJIAN);
+		}
+		
 	public void createSDCardDir() {
 		if (Environment.MEDIA_MOUNTED.equals(Environment
 				.getExternalStorageState())) {
@@ -860,6 +935,132 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 			}
 		}
 	}
+
+		/**
+		 * 保存裁剪之后的图片数据
+		 * 
+		 * @param picdata
+		 */
+		private void setPicToView(Intent picdata) {
+			Bundle extras = picdata.getExtras();
+			if (extras != null) {
+				photo = extras.getParcelable("data");
+				Drawable drawable = new BitmapDrawable(photo);
+				/**
+				 * 下面注释的方法是将裁剪之后的图片以Base64Coder的字符方式上 传到服务器，QQ头像上传采用的方法跟这个类似
+				 */
+				savaBitmap(photo);
+//				switch (setImageTag) {
+//				case IV_1:
+//					iv_1.setImageBitmap(photo);
+//					break;
+//				case IV_2:
+//					iv_2.setImageBitmap(photo);
+//					break;
+//				case IV_3:
+//					iv_3.setImageBitmap(photo);
+//					break;
+//				case IV_logo:
+//					iv_logo.setImageBitmap(photo);
+//					break;
+//
+//				default:
+//					break;
+//				}
+			}
+		}
+
+		// 将剪切后的图片保存到本地图片上！
+		public void savaBitmap(Bitmap bitmap) {
+			Date date = new Date(System.currentTimeMillis());
+			SimpleDateFormat dateFormat = new SimpleDateFormat(
+					"'IMG'_yyyyMMddHHmmss");
+			cutnameString = dateFormat.format(date);
+			filename = Environment.getExternalStorageDirectory().getPath() + "/"
+					+ cutnameString + ".jpg";
+			Tools.Log("filename="+filename);
+			File f = new File(filename);
+	        putSharedPreferenceValue("headImg_filename", filename);
+			
+			FileOutputStream fOut = null;
+			try {
+				f.createNewFile();
+				fOut = new FileOutputStream(f);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);// 把Bitmap对象解析成流
+			
+			try {
+				fOut.flush();
+				fOut.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			RequestDailog.showDialog(this, "正在上传图片，请稍后");
+			HttpUtils.getImageLoad(res_uploadaPhoto,getSharedPreferenceValue("key"),"good_img",f);
+		}
+
+		//*****************************图像处理操作     end******************************************
+			JsonHttpResponseHandler res_uploadaPhoto = new JsonHttpResponseHandler()
+			{
+
+				@Override
+				public void onSuccess(int statusCode, Header[] headers,
+						JSONObject response) {
+					super.onSuccess(statusCode, headers, response);
+					first++;
+					switch (setImageTag) {
+					case IV_1:
+						iv_1.setImageBitmap(photo);
+						break;
+					case IV_2:
+						iv_2.setImageBitmap(photo);
+						break;
+					case IV_3:
+						iv_3.setImageBitmap(photo);
+						break;
+					case IV_4:
+						iv_4.setImageBitmap(photo);
+						break;
+					case IV_5:
+						iv_5.setImageBitmap(photo);
+						break;
+					default:
+						break;
+					}
+					RequestDailog.closeDialog();
+					Tools.Log("上传图片返回值="+response);
+					JSONObject datas = null;
+					String error = null;
+					try {
+						datas = response.getJSONObject("datas");
+						error = datas.getString("error");
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+					
+					if (error == null) {
+						try { 
+							imageString1 = datas.getString("image_name");
+							if (first>1) 
+							{
+								imageString = imageString +","+ imageString1; 
+							}
+							else//第一次进来的时候，不要加“，”进行连接
+							{
+								imageString = imageString + imageString1; 
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}else{
+						Tools.Notic(B3_AddActivity.this, error+"", null);
+					}
+					
+				}
+			};
 
 	//
 	public void SaveMod(List<XingHaoModel> datamodel) {

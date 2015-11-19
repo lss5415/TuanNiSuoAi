@@ -751,7 +751,7 @@ public class HttpUtils {
 //		params.put("key",key);
 //		params.put("commonid",commonid);
 //		client.post(url,params,res);
-		String url = base_url + "index.php?act=seller_goods&op=goods_unshow"+"&key="+key+"&commonid="+commonid;
+		String url = base_url + "index.php?act=seller_goods&op=goods_show"+"&key="+key+"&commonid="+commonid;
 		client.get(url, res);
 	}
 	/**
@@ -1542,6 +1542,25 @@ public class HttpUtils {
 		params.put("gc_id",gc_id);
 		params.put("sp_id",sp_id);
 		client.post(url, params,res);
+	}
+	/**
+	 *  商品图片上传
+	 * @param key 当前登录令牌
+	 * @param name FILES字段名
+	 * @param file 图片
+	 */
+	public static void getImageLoad(AsyncHttpResponseHandler res, String key,String name,File file ) {
+		RequestParams params = new RequestParams();
+		try {
+			params.put("key", key);
+			params.put("name", name);
+			params.put("good_img",file);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} // Upload a File
+		String url = base_url + "index.php?act=seller_album&op=image_upload";
+		client.post(url, params, res);
 	}
 
 	public static String iterateParams(HashMap<String,String> params){

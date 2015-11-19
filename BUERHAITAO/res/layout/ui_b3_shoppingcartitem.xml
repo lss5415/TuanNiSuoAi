@@ -79,14 +79,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="￥"
-                            android:textColor="#F10583" />
+                            android:textColor="@color/theme_color" />
 
                         <TextView
                             android:id="@+id/tv_goods_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="52.5"
-                            android:textColor="#F10583" />
+                            android:textColor="@color/theme_color" />
 						</LinearLayout>
 
                         <TextView
@@ -97,7 +97,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginRight="5dp"
                             android:text="x1"
-                            android:textColor="#F10583" />
+                            android:textColor="@color/theme_color" />
                     </RelativeLayout>
                 </LinearLayout>
 

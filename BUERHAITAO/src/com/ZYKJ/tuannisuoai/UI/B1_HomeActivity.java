@@ -88,6 +88,7 @@ public class B1_HomeActivity extends BaseActivity {
 			cityname = getIntent().getStringExtra("cityname");
 			tv_cityname.setText(cityname);
 			String cityid = getIntent().getStringExtra("cityid");
+			Toast.makeText(B1_HomeActivity.this, cityid, Toast.LENGTH_LONG).show();
 			String lng = getIntent().getStringExtra("lng");
 			String lat = getIntent().getStringExtra("lat");
 			putSharedPreferenceValue("cityname", cityname);

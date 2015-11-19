@@ -64,7 +64,7 @@ public class B_1_1_Edit extends BaseActivity {
 	private static final int IV_logo = 104;
 	 
 	int setImageTag = 0;
-	String slide = null; //轮播图多张逗号分隔
+	String slide = ""; //轮播图多张逗号分隔
 	String avatar  = null;//店铺图标
 	int first = 0; //第一次上传图片
 	Bitmap photo;
@@ -378,7 +378,7 @@ public class B_1_1_Edit extends BaseActivity {
 				e.printStackTrace();
 			}
 			
-			RequestDailog.showDialog(this, "正在上传头像，请稍后");
+			RequestDailog.showDialog(this, "正在上传图片，请稍后");
 			HttpUtils.update(res_uploadaPhoto,getSharedPreferenceValue("key"),"avatar",f);
 		}
 	//*****************************图像处理操作     end******************************************

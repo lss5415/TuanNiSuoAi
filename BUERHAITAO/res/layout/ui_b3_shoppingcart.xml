@@ -59,7 +59,7 @@
                     android:layout_width="120dp"
                     android:layout_height="fill_parent"
                     android:layout_alignParentRight="true"
-                    android:background="#F10583"
+                    android:background="@color/theme_color"
                     android:gravity="center"
                     android:text="结算（0）"
                     android:textColor="#FFF"
@@ -90,7 +90,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="3dp"
                             android:text="￥"
-                            android:textColor="#F10583" />
+                            android:textColor="@color/theme_color" />
 
                         <TextView
                             android:id="@+id/tv_sumgoods"
@@ -99,7 +99,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="3dp"
                             android:text="0.00"
-                            android:textColor="#F10583" />
+                            android:textColor="@color/theme_color" />
                     </LinearLayout>
 
                     <LinearLayout
