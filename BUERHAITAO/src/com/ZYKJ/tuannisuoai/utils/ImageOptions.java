@@ -21,6 +21,7 @@ import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListene
 public class ImageOptions {
 	
     public static SimpleImageLoadingListener listener;
+    public static DisplayImageOptions options;
 
 	public static DisplayImageOptions getLogoOptions(boolean round) {
 		DisplayImageOptions.Builder m_options = new DisplayImageOptions.Builder()
@@ -97,5 +98,20 @@ public class ImageOptions {
         canvas.drawBitmap(bitmap, rect, rect, paint);
    
         return output;
+    }
+    
+    public static DisplayImageOptions getOpstion(){
+    	if(options == null){
+        	options = new DisplayImageOptions.Builder()
+    			.showImageOnLoading(R.drawable.buerhaitao)
+    			.showImageForEmptyUri(R.drawable.buerhaitao)
+    			.showImageOnFail(R.drawable.buerhaitao)
+    			.cacheInMemory(true)
+    			.cacheOnDisk(true)
+    			.considerExifParams(true)
+    			.displayer(new RoundedBitmapDisplayer(5))
+    			.build();
+    	}
+    	return options;
     }
 }

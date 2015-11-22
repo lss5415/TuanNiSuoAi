@@ -78,17 +78,21 @@ public class B1_HomeActivity extends BaseActivity {
 		initView();
 		tv_cityname = (TextView) findViewById(R.id.tv_cityname);
 		if (getIntent().getStringExtra("cityname") == null) {
-			putSharedPreferenceValue("lng", "118.338501");
-			putSharedPreferenceValue("lat", "35.063786");
-			putSharedPreferenceValue("cityid", "235");
-			putSharedPreferenceValue("cityname", "临沂");
-			HttpUtils.getFirstList(res_getSyList, "235", "118.338501",
-					"35.063786");
+//			putSharedPreferenceValue("lng", "118.338501");
+//			putSharedPreferenceValue("lat", "35.063786");
+//			putSharedPreferenceValue("cityid", "235");
+//			putSharedPreferenceValue("cityname", "临沂");
+			String lng = getSharedPreferenceValue("lng");
+			String lat = getSharedPreferenceValue("lat");
+			String cityid = getSharedPreferenceValue("cityid");
+			String cityname = getSharedPreferenceValue("cityname");
+			tv_cityname.setText(cityname);
+			
+			HttpUtils.getFirstList(res_getSyList, cityid, lng,lat);
 		} else {
 			cityname = getIntent().getStringExtra("cityname");
 			tv_cityname.setText(cityname);
 			String cityid = getIntent().getStringExtra("cityid");
-			Toast.makeText(B1_HomeActivity.this, cityid, Toast.LENGTH_LONG).show();
 			String lng = getIntent().getStringExtra("lng");
 			String lat = getIntent().getStringExtra("lat");
 			putSharedPreferenceValue("cityname", cityname);
