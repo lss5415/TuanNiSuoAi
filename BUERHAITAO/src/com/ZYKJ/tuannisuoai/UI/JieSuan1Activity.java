@@ -199,26 +199,30 @@ public class JieSuan1Activity extends BaseActivity {
 		//
 		// break;
 		case R.id.tv_jiesuanqueren:
-			JSONObject message = new JSONObject();//留言
-			JSONObject pickupType = new JSONObject();//配送方式
-			JSONObject payType = new JSONObject();//支付方式
-			for (int i = 0; i < object.size(); i++) {
-				CarJieSuan jiesuan = object.get(i);
-				message.put(jiesuan.getStore_id(), jiesuan.getMessage());
-				pickupType.put(jiesuan.getStore_id(), jiesuan.getDlyoPickupType());
-				payType.put(jiesuan.getStore_id(), jiesuan.getPayType());
+			if(StringUtils.isEmpty(address_id)){
+				Toast.makeText(this, "地址不能为空", Toast.LENGTH_LONG).show();
+			}else{
+				JSONObject message = new JSONObject();//留言
+				JSONObject pickupType = new JSONObject();//配送方式
+				JSONObject payType = new JSONObject();//支付方式
+				for (int i = 0; i < object.size(); i++) {
+					CarJieSuan jiesuan = object.get(i);
+					message.put(jiesuan.getStore_id(), jiesuan.getMessage());
+					pickupType.put(jiesuan.getStore_id(), jiesuan.getDlyoPickupType());
+					payType.put(jiesuan.getStore_id(), jiesuan.getPayType());
+				}
+				RequestParams params = new RequestParams();
+				params.put("key",key);
+				params.put("ifcart","0");
+				params.put("cart_id",xzhdgg);
+				params.put("address_id",address_id);
+				params.put("pay_message",message.toString());
+				params.put("dlyo_pickup_type",pickupType.toString());
+				params.put("pay_type",payType.toString());
+				params.put("pd_pay",check);
+				params.put("client_type", "android");
+				HttpUtils.getBuySecond(res_BuySecond, params);
 			}
-			RequestParams params = new RequestParams();
-			params.put("key",key);
-			params.put("ifcart","0");
-			params.put("cart_id",xzhdgg);
-			params.put("address_id",address_id);
-			params.put("pay_message",message.toString());
-			params.put("dlyo_pickup_type",pickupType.toString());
-			params.put("pay_type",payType.toString());
-			params.put("pd_pay",check);
-			params.put("client_type", "android");
-			HttpUtils.getBuySecond(res_BuySecond, params);
 			break;
 		case R.id.im_uncheck:
 			im_check.setVisibility(View.VISIBLE);
@@ -255,10 +259,11 @@ public class JieSuan1Activity extends BaseActivity {
 				JSONObject jsonData = datas.getJSONObject("datas");
 				String error = jsonData.getString("error");
 				if(StringUtils.isEmpty(error)){
-					if (jsonData.getInteger("order_amount") == 0) {
+					if (jsonData.getFloat("order_amount") <= 0) {
 						Toast.makeText(getApplicationContext(), "用钱包支付成功！", Toast.LENGTH_LONG).show();
 						Intent itgou = new Intent(JieSuan1Activity.this,B3_ShoppingCartActivity.class);
 						startActivity(itgou);
+						finish();
 					}else {
 						pay_sn = jsonData.getString("pay_sn");
 						if (tv_zffs.getText().toString().equals("微信支付")) {
