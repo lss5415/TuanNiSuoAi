@@ -26,7 +26,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,13 +35,16 @@ import com.ZYKJ.tuannisuoai.adapter.B1_a2_CaiNiLikeAdapter;
 import com.ZYKJ.tuannisuoai.adapter.B1_a3_MeiRiHaoDianAdapter;
 import com.ZYKJ.tuannisuoai.adapter.HorizontalListViewAdapter;
 import com.ZYKJ.tuannisuoai.base.BaseActivity;
+import com.ZYKJ.tuannisuoai.utils.AnimateFirstDisplayListener;
 import com.ZYKJ.tuannisuoai.utils.HttpUtils;
+import com.ZYKJ.tuannisuoai.utils.ImageOptions;
 import com.ZYKJ.tuannisuoai.utils.Tools;
 import com.ZYKJ.tuannisuoai.view.AutoListView;
 import com.ZYKJ.tuannisuoai.view.RequestDailog;
 import com.ZYKJ.tuannisuoai.view.ToastView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 public class B1_HomeActivity extends BaseActivity {
 	// 首页中间八个大分类
@@ -71,6 +73,7 @@ public class B1_HomeActivity extends BaseActivity {
 	private List<Map<String, String>> data2 = new ArrayList<Map<String, String>>();
 	private EditText a1_sousuofujin;
 	private TextView tv_dianpuming, tv_kucun, tv_xiaoliang;
+	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -219,7 +222,7 @@ public class B1_HomeActivity extends BaseActivity {
 					org.json.JSONArray arr = datas.getJSONArray("day_special");
 					JSONObject jsonIt = arr.getJSONObject(0);
 					ImageLoader.getInstance().displayImage(
-							jsonIt.getString("goods_image"), im_b1_a1_pic);
+							jsonIt.getString("goods_image"), im_b1_a1_pic, ImageOptions.getOpstion(), animateFirstListener);
 					tv_b1_a1_chanpinname
 							.setText(jsonIt.getString("goods_name"));
 					tv_b1_a1_chanpinjianjie.setText(jsonIt

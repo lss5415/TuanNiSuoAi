@@ -29,12 +29,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ZYKJ.tuannisuoai.R;
+import com.ZYKJ.tuannisuoai.utils.AnimateFirstDisplayListener;
 import com.ZYKJ.tuannisuoai.utils.HttpUtils;
+import com.ZYKJ.tuannisuoai.utils.ImageOptions;
 import com.ZYKJ.tuannisuoai.utils.Tools;
 import com.ZYKJ.tuannisuoai.view.NoScrollGridView;
 import com.ZYKJ.tuannisuoai.view.RequestDailog;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 @SuppressLint("UseSparseArrays") public class B5_3_MyShaiDanQuanAdapter extends BaseAdapter {
 
@@ -49,6 +52,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 //	ListView lv_comment;
 	GridViewAdatper_myshaidanquan photosadapter;
 	B5_3_MyShaiDanQuanPinglunAdapter adapter;
+	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+	
 	public B5_3_MyShaiDanQuanAdapter(Activity c, List<Map<String, Object>> data,String key) {
 		this.c = c;
 		this.data = data;
@@ -155,7 +160,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 //		viewHolder.tv_checkallcomment.setText("查看所有"+replys+"条评论");//查看所有3条评论
 //		viewHolder.tv_checkallcomment.setOnClickListener(new Checkallcomment(position));
 //		viewHolder.comment0.setOnClickListener(new Comment(position));
-		ImageLoader.getInstance().displayImage(data.get(position).get("avatar").toString(), viewHolder.iv_head_img);
+		ImageLoader.getInstance().displayImage(data.get(position).get("avatar").toString(), viewHolder.iv_head_img, ImageOptions.getOpstion(), animateFirstListener);
 //		ImageLoader.getInstance().displayImage(data.get(position).get("image").toString(), viewHolder.iv_head_img);
 		return convertView;
 	}

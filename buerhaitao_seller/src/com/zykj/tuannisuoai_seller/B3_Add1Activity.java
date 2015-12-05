@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zykj.tuannisuoai_seller.adapter.GridAdapter;
 import com.zykj.tuannisuoai_seller.adapter.GridAdapter.SaveModel;
 import com.zykj.tuannisuoai_seller.base.BaseActivity;
@@ -44,7 +45,7 @@ import com.zykj.tuannisuoai_seller.utils.UIDialog;
  * @author lss 2015年7月28日 商品详情编辑
  * 
  */
-public class B3_AddActivity extends BaseActivity implements SaveModel {
+public class B3_Add1Activity extends BaseActivity implements SaveModel {
 	// 选择分类
 	private LinearLayout rl_fenlei;
 	// 型号表
@@ -74,7 +75,7 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 	int state = 0;// 默认=0，型号1 state=1,型号2 state=2,型号12 state = 3
 	ImageView iv_1,iv_2,iv_3, iv_4, iv_5;
 //	String tupian = "04920800982552959.jpg";
-	String tupian1 = "04920800982552959.jpg";
+//	String tupian1 = "04920800982552959.jpg";
 	String imageString="";
 	Bitmap photo;
 	int first = 0; //第一次上传图片
@@ -95,6 +96,9 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 	private static final int PAIZHAO = 14;
 	private static final int XIANGCE = 15;
 	private static final int CAIJIAN = 16;
+	private String goods_commonid;
+	private String newxinghao1="",newxinghao2="";
+	private TextView tv_cancel;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -123,18 +127,195 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 		iv_3 = (ImageView) findViewById(R.id.img_3);
 		iv_4 = (ImageView) findViewById(R.id.img_4);
 		iv_5 = (ImageView) findViewById(R.id.img_5);
-
-		// setListViewHeightBasedOnChildren(lv_grid);
-
 		key = getSharedPreferenceValue("key");
+		goods_commonid = getIntent().getStringExtra("goods_commonid");
+		tv_cancel = (TextView)findViewById(R.id.tv_cancel);
+
+		HttpUtils.getEditProduct(res_getEditProduct,goods_commonid,key);
+//		HttpUtils.getEditProduct(res_getEditProduct,goods_commonid,key);
+
 		setListener(rl_fenlei, ll_xh1, ll_xh2, tv_scbg, tv_save, iv_1, iv_2,
-				iv_3, iv_4, iv_5);
+				iv_3, iv_4, iv_5,tv_cancel);
 	}
 
+	/**
+	 * 带来编辑产品的数据
+	 */
+	JsonHttpResponseHandler res_getEditProduct = new JsonHttpResponseHandler() {
+
+		public void onSuccess(int statusCode, Header[] headers,
+				JSONObject response) {
+			// TODO Auto-generated method stub
+			super.onSuccess(statusCode, headers, response);
+			RequestDailog.closeDialog();
+			String error = null;
+			JSONObject datas = null;
+			try {
+				datas = response.getJSONObject("datas");
+				error = datas.getString("error");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (error == null)// 成功
+			{
+				try {
+					data.clear();
+					JSONObject jobedtproj = datas.getJSONObject("common_info");
+					et_chanpinming.setText(jobedtproj.getString("goods_name"));
+					et_chanpinjianjie.setText(jobedtproj.getString("goods_jingle"));
+					try {
+						JSONObject jobspec_value = jobedtproj.getJSONObject("spec_value");
+						if (jobspec_value.length()==1) {
+							org.json.JSONArray jaspec = jobspec_value.getJSONArray("1");
+							for (int i = 0; i < jaspec.length(); i++) {
+								JSONObject jsonspec = jaspec.getJSONObject(i);
+								newxinghao1 = newxinghao1 + jsonspec.getString("spec_value_name")+",";
+							}
+							et_xh1.setText(newxinghao1);
+						}else if (jobspec_value.length()==2) {
+							org.json.JSONArray jaspec = jobspec_value.getJSONArray("1");
+							for (int i = 0; i < jaspec.length(); i++) {
+								JSONObject jsonspec = jaspec.getJSONObject(i);
+								newxinghao1 = newxinghao1 + jsonspec.getString("spec_value_name")+",";
+							}
+							org.json.JSONArray jaspec1 = jobspec_value.getJSONArray("2");
+							for (int i = 0; i < jaspec1.length(); i++) {
+								JSONObject jsonspec1 = jaspec1.getJSONObject(i);
+								newxinghao2 = newxinghao2 + jsonspec1.getString("spec_value_name")+",";
+							}
+							et_xh1.setText(newxinghao1);
+							et_xh2.setText(newxinghao2);
+						}
+					} catch (Exception e) {
+						
+					}
+					gc_id = jobedtproj.getString("gc_id");
+					gc_name = jobedtproj.getString("gc_name_2");
+					TextView06.setText(gc_name);
+					
+					try {
+						org.json.JSONArray jobspec_name = jobedtproj.getJSONArray("spec_name");
+						for (int i = 0; i < jobspec_name.length(); i++) {
+							JSONObject jsonItem = jobspec_name.getJSONObject(i);
+							if (i==0) {
+								tv_xinghao1.setText(jsonItem.getString("spec_name"));
+								tv_xinghao11.setText(jsonItem.getString("spec_id"));
+								state = 1;
+							}else if(i==1){
+								tv_xinghao2.setText(jsonItem.getString("spec_name"));
+								tv_xinghao22.setText(jsonItem.getString("spec_id"));
+								state = 3;
+							}
+						}
+						
+					} catch (Exception e) {
+						state = 0;
+					}
+					
+					try {
+						org.json.JSONArray  arry = jobedtproj.getJSONArray("goods_image");
+						for (int i = 0; i < arry.length(); i++) {
+							String a = arry.getString(i).toString();
+							if (i==0) {
+								ImageLoader.getInstance().displayImage(arry.getString(i).toString(), iv_1);
+								String a1 = arry.getString(i).toString();
+								String b = a1.substring(a1.lastIndexOf("/")+1);
+								imageString1 = b;
+							}else if (i==1) {
+								ImageLoader.getInstance().displayImage(arry.getString(i).toString(), iv_2);
+								String a1 = arry.getString(i).toString();
+								String b = a1.substring(a1.lastIndexOf("/")+1);
+								imageString = b; 
+							}else if (i==2) {
+								ImageLoader.getInstance().displayImage(arry.getString(i).toString(), iv_3);
+								String a1 = arry.getString(i).toString();
+								String b = a1.substring(a1.lastIndexOf("/")+1);
+								imageString = imageString +","+ b; 
+							}else if (i==3) {
+								ImageLoader.getInstance().displayImage(arry.getString(i).toString(), iv_4);
+								String a1 = arry.getString(i).toString();
+								String b = a1.substring(a1.lastIndexOf("/")+1);
+								imageString = imageString +","+ b; 
+							}else if (i==4) {
+								ImageLoader.getInstance().displayImage(arry.getString(i).toString(), iv_5);
+								String a1 = arry.getString(i).toString();
+								String b = a1.substring(a1.lastIndexOf("/")+1);
+								imageString = imageString +","+ b; 
+							}
+						}
+					} catch (Exception e) {
+						
+					}
+
+//					goods_spec_list
+					try {
+						org.json.JSONArray biaogearry = datas.getJSONArray("goods_spec_list");
+						for (int i = 0; i < biaogearry.length(); i++) {
+							JSONObject obbiaoge = biaogearry.getJSONObject(i);
+							XingHaoModel model = new XingHaoModel();
+							try {
+								model.setXinghao1(obbiaoge.getString("spec_value_name_1"));
+							} catch (Exception e) {
+								
+							}
+							try {
+								model.setXinghao2(obbiaoge.getString("spec_value_name_2"));
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
+							try {
+								model.setGuigezhi1(obbiaoge.getString("spec_value_id_1"));
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
+							try {
+								model.setGuigezhi2(obbiaoge.getString("spec_value_id_2"));
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
+							model.setKucun(obbiaoge.getString("storage"));
+							model.setJiage(obbiaoge.getString("price"));
+							model.setTejia(obbiaoge.getString("goods_promotion_price"));
+							data.add(model);
+						}
+						if (biaogearry.length()==0) {
+							XingHaoModel model = new XingHaoModel();
+							model.setXinghao1("");
+							model.setXinghao2("");
+							model.setKucun(jobedtproj.getString("goods_storage"));
+							model.setJiage(jobedtproj.getString("goods_price"));
+							model.setTejia(jobedtproj.getString("goods_promotion_price"));
+							model.setGuigezhi1("");
+							model.setGuigezhi2("");
+							data.add(model);
+						}
+					} catch (Exception e) {
+						
+					}
+					
+					
+					GridAdapter listAdapter = new GridAdapter(B3_Add1Activity.this, data, B3_Add1Activity.this);
+					lv_grid.setAdapter(listAdapter);
+					
+					
+				} catch (org.json.JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			} else// 失败
+			{
+				Tools.Log("res_Points_error=" + error + "");
+			}
+
+		}
+
+	};
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.rl_fenlei:
-			Intent itfenlei = new Intent(B3_AddActivity.this,
+			Intent itfenlei = new Intent(B3_Add1Activity.this,
 					B2_FenLeiActivity.class);
 			startActivityForResult(itfenlei, 0);
 			break;
@@ -147,7 +328,7 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 				if (jia == 0) {
 					jia = 1;
 				} else {
-					new AlertDialog.Builder(B3_AddActivity.this)
+					new AlertDialog.Builder(B3_Add1Activity.this)
 							.setTitle("请选择")
 							.setIcon(android.R.drawable.ic_dialog_info)
 							.setSingleChoiceItems(str, 0,
@@ -173,7 +354,7 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 				if (jia == 0) {
 					jia = 1;
 				} else {
-					new AlertDialog.Builder(B3_AddActivity.this)
+					new AlertDialog.Builder(B3_Add1Activity.this)
 							.setTitle("请选择")
 							.setIcon(android.R.drawable.ic_dialog_info)
 							.setSingleChoiceItems(str, 0,
@@ -315,7 +496,7 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 					String image_path = imageString1;
 					String image_all = imageString;
 					// lv_grid.
-					HttpUtils.ShangPinFaBu(res_Fabu, key, cate_id, cate_name,
+					HttpUtils.ShangPinFaBuBianji(res_Fabu, key,goods_commonid, cate_id, cate_name,
 							g_name, g_price, goods_promotion_price, g_storage,
 							goods_jingle, image_path, image_all);
 				} else if (state == 1) {
@@ -368,7 +549,7 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 							.toString();
 					String image_path = imageString1;
 					String image_all = imageString;
-					HttpUtils.ShangPinFaBu1(res_Fabu, key,cate_id,cate_name,g_name,sp_name,sp_value,spec,goods_jingle,image_path,image_all);
+					HttpUtils.ShangPinFaBuBianji1(res_Fabu, key,goods_commonid,cate_id,cate_name,g_name,sp_name,sp_value,spec,goods_jingle,image_path,image_all);
 				} else if (state == 2) {
 //					Toast.makeText(getApplicationContext(), "型号2",Toast.LENGTH_LONG).show();
 					String cate_id = gc_id;
@@ -418,7 +599,7 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 							.toString();
 					String image_path = imageString1;
 					String image_all = imageString;
-					HttpUtils.ShangPinFaBu1(res_Fabu, key,cate_id,cate_name,g_name,sp_name,sp_value,spec,goods_jingle,image_path,image_all);
+					HttpUtils.ShangPinFaBuBianji1(res_Fabu, key,goods_commonid,cate_id,cate_name,g_name,sp_name,sp_value,spec,goods_jingle,image_path,image_all);
 				} else if (state == 3) {
 //					Toast.makeText(getApplicationContext(), "多个型号",Toast.LENGTH_LONG).show();
 					String cate_id = gc_id;
@@ -432,7 +613,7 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 					// String sp_value 规格值，参见下方范例
 					String jsonsp_value = "{'"+ tv_xinghao11.getText().toString() + "':{";
 					for (int i = 0; i < datamodel.size(); i++) {
-						jsonsp_value = jsonsp_value + "'"
+						jsonsp_value = jsonsp_value + "'" 
 								+ datamodel.get(i).guigezhi1 + "':'"
 								+ datamodel.get(i).getXinghao1() + "',";
 					}
@@ -478,7 +659,7 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 							.toString();
 					String image_path = imageString1;
 					String image_all = imageString;
-					HttpUtils.ShangPinFaBu1(res_Fabu, key,cate_id,cate_name,g_name,sp_name,sp_value,spec,goods_jingle,image_path,image_all);
+					HttpUtils.ShangPinFaBuBianji1(res_Fabu, key,goods_commonid,cate_id,cate_name,g_name,sp_name,sp_value,spec,goods_jingle,image_path,image_all);
 				}
 			}
 
@@ -587,7 +768,9 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 		case R.id.dialog_modif_3:// 取消
 			UIDialog.closeDialog();
 			break;
-
+		case R.id.tv_cancel://
+			this.finish();
+			break;
 		default:
 			break;
 		}
@@ -612,14 +795,13 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 			if (error == null) {
 				Toast.makeText(getApplicationContext(), "发布成功",
 						Toast.LENGTH_LONG).show();
-				B3_AddActivity.this.finish();
+				B3_Add1Activity.this.finish();
 				Intent itpro = new Intent();
-				itpro.setClass(B3_AddActivity.this, B0_MainActivity.class);
+				itpro.setClass(B3_Add1Activity.this, B2_ProductActivity.class);
 				startActivity(itpro);
-				B0_MainActivity.TiaoZhuan(3);
 				// todo清数据
 			} else {
-				Tools.Notic(B3_AddActivity.this, error + "", null);
+				Tools.Notic(B3_Add1Activity.this, error + "", null);
 			}
 		}
 	};
@@ -657,7 +839,7 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 				}
 
 			} else {
-				Tools.Notic(B3_AddActivity.this, error + "", null);
+				Tools.Notic(B3_Add1Activity.this, error + "", null);
 			}
 		}
 	};
@@ -699,7 +881,7 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 					}
 					state = 1;
 					GridAdapter listAdapter = new GridAdapter(
-							B3_AddActivity.this, data, B3_AddActivity.this);
+							B3_Add1Activity.this, data, B3_Add1Activity.this);
 					lv_grid.setAdapter(listAdapter);
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -707,7 +889,7 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 				}
 
 			} else {
-				Tools.Notic(B3_AddActivity.this, error + "", null);
+				Tools.Notic(B3_Add1Activity.this, error + "", null);
 			}
 		}
 	};
@@ -749,7 +931,7 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 					}
 					state = 2;
 					GridAdapter listAdapter = new GridAdapter(
-							B3_AddActivity.this, data, B3_AddActivity.this);
+							B3_Add1Activity.this, data, B3_Add1Activity.this);
 					lv_grid.setAdapter(listAdapter);
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -757,7 +939,7 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 				}
 
 			} else {
-				Tools.Notic(B3_AddActivity.this, error + "", null);
+				Tools.Notic(B3_Add1Activity.this, error + "", null);
 			}
 		}
 	};
@@ -792,7 +974,7 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 				}
 
 			} else {
-				Tools.Notic(B3_AddActivity.this, error + "", null);
+				Tools.Notic(B3_Add1Activity.this, error + "", null);
 			}
 		}
 	};
@@ -835,7 +1017,7 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 					}
 					state = 3;
 					GridAdapter listAdapter = new GridAdapter(
-							B3_AddActivity.this, data, B3_AddActivity.this);
+							B3_Add1Activity.this, data, B3_Add1Activity.this);
 					lv_grid.setAdapter(listAdapter);
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -843,7 +1025,7 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 				}
 
 			} else {
-				Tools.Notic(B3_AddActivity.this, error + "", null);
+				Tools.Notic(B3_Add1Activity.this, error + "", null);
 			}
 		}
 	};
@@ -917,8 +1099,8 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 			// 下面这个crop=true是设置在开启的Intent中设置显示的VIEW可裁剪
 			intent.putExtra("crop", "true");
 			// aspectX aspectY 是宽高的比例
-			intent.putExtra("aspectX", 1);
-			intent.putExtra("aspectY", 1);
+//			intent.putExtra("aspectX", 1);
+//			intent.putExtra("aspectY", 1);
 			// outputX outputY 是裁剪图片宽高
 			intent.putExtra("outputX", 150);
 			intent.putExtra("outputY", 150);
@@ -1061,7 +1243,7 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 							e.printStackTrace();
 						}
 					}else{
-						Tools.Notic(B3_AddActivity.this, error+"", null);
+						Tools.Notic(B3_Add1Activity.this, error+"", null);
 					}
 					
 				}
@@ -1071,4 +1253,5 @@ public class B3_AddActivity extends BaseActivity implements SaveModel {
 	public void SaveMod(List<XingHaoModel> datamodel) {
 		this.datamodel = datamodel;
 	}
+
 }

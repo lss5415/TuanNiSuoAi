@@ -30,9 +30,12 @@ import android.widget.Toast;
 
 import com.ZYKJ.tuannisuoai.R;
 import com.ZYKJ.tuannisuoai.base.BaseActivity;
+import com.ZYKJ.tuannisuoai.utils.AnimateFirstDisplayListener;
 import com.ZYKJ.tuannisuoai.utils.HttpUtils;
 import com.ZYKJ.tuannisuoai.utils.ImageOptions;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 /**
  * @author csh
@@ -47,6 +50,7 @@ public class B2_ClassifyActivity extends BaseActivity{
 	private EditText search_input;
     private RadioGroup.LayoutParams mRadioParams;
     private List<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
+	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -162,7 +166,8 @@ public class B2_ClassifyActivity extends BaseActivity{
 	                        TextView name= (TextView) convertView.findViewById(R.id.classify_name);
 	                        ImageView image= (ImageView) convertView.findViewById(R.id.classify_image);
 	                        name.setText(list.get(postion).get("gc_name"));
-	                        ImageOptions.displayImage2Circle(image, list.get(postion).get("image"), 10f);
+//	                        ImageOptions.displayImage2Circle(image, list.get(postion).get("image"), 10f);
+	                        ImageLoader.getInstance().displayImage(list.get(postion).get("image"),  image, ImageOptions.getOpstion(), animateFirstListener);
 	                        
 							return convertView;
 						}

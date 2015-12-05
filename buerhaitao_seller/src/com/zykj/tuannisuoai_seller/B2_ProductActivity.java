@@ -9,6 +9,7 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,7 +28,6 @@ import android.widget.TextView;
 
 import com.external.maxwin.view.XListView.IXListViewListener;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.zykj.tuannisuoai_seller.R;
 import com.zykj.tuannisuoai_seller.adapter.B5_10_MyCollectionAdapter;
 import com.zykj.tuannisuoai_seller.base.BaseActivity;
 import com.zykj.tuannisuoai_seller.utils.HttpUtils;
@@ -43,8 +43,7 @@ import com.zykj.tuannisuoai_seller.utils.Tools;
  * 
  */
 public class B2_ProductActivity extends BaseActivity implements
-		IXListViewListener, B5_10_MyCollectionAdapter.GetMap_id,
-		OnItemClickListener {
+		IXListViewListener, B5_10_MyCollectionAdapter.GetMap_id{
 
 	TextView tv_edit;// 编辑
 	LinearLayout ll_product, ll_store;// 产品，商铺
@@ -94,6 +93,20 @@ public class B2_ProductActivity extends BaseActivity implements
 		listview.setPullRefreshEnable(true);
 		listview.setXListViewListener(this, 0);
 		listview.setRefreshTime();
+		listview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				String gonggonggoodid = data.get(arg2-1).get("goods_commonid");
+//				Toast.makeText(B2_ProductActivity.this, gonggonggoodid, Toast.LENGTH_LONG).show();
+//				HttpUtils.getFavoriteProduct(res_getFavoriteProduct,getSharedPreferenceValue("key"), gonggonggoodid, curpage + "");
+				Intent itdayspec = new Intent();
+				itdayspec.putExtra("goods_commonid", gonggonggoodid);
+				itdayspec.setClass(B2_ProductActivity.this, B3_Add1Activity.class);
+				startActivity(itdayspec);
+			}
+		});
 		RequestDailog.showDialog(this, "正在加载数据，请稍后");
 		HttpUtils.getFavoriteProduct(res_getFavoriteProduct,
 				getSharedPreferenceValue("key"), page + "", curpage + "");
@@ -250,6 +263,7 @@ public class B2_ProductActivity extends BaseActivity implements
 		// TODO Auto-generated method stub
 		if (tagProduct.equals("1")) // 获取出售中的产品信息
 		{
+			curpage = 1;
 			HttpUtils.getFavoriteProduct(res_getFavoriteProduct,
 					getSharedPreferenceValue("key"), page + "", curpage + "");
 		} else if (tagStore.equals("1")) {// 获取已下架的产品信息
@@ -329,7 +343,9 @@ public class B2_ProductActivity extends BaseActivity implements
 			if (error == null)// 成功
 			{
 				try {
-					data.clear();
+					if (curpage==1) {
+						data.clear();
+					}
 					org.json.JSONArray array = datas.getJSONArray("goods_list");// 等收藏功能完善之后更改array的名字
 					for (int i = 0; i < array.length(); i++) {
 						JSONObject jsonItem = array.getJSONObject(i);
@@ -483,11 +499,6 @@ public class B2_ProductActivity extends BaseActivity implements
 			}
 		}
 		return true;
-	}
-
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-
 	}
 
 }

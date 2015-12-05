@@ -16,10 +16,13 @@ import android.widget.TextView;
 
 import com.ZYKJ.tuannisuoai.R;
 import com.ZYKJ.tuannisuoai.data.CarJieSuan;
+import com.ZYKJ.tuannisuoai.utils.AnimateFirstDisplayListener;
+import com.ZYKJ.tuannisuoai.utils.ImageOptions;
 import com.ZYKJ.tuannisuoai.view.UIDialog;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.ta.utdid2.android.utils.StringUtils;
 
 public class JieSuanAdapter extends BaseExpandableListAdapter {
@@ -28,6 +31,7 @@ public class JieSuanAdapter extends BaseExpandableListAdapter {
 	private Context context;
 	private LayoutInflater inflater;
 	private List<CarJieSuan> object;
+	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
 	public JieSuanAdapter(Context context, JSONArray datas, List<CarJieSuan> object) {
 		this.datas = datas;
@@ -95,7 +99,7 @@ public class JieSuanAdapter extends BaseExpandableListAdapter {
             viewHolder.et_liuyan.setTag(groupPosition);
         }
 		String goods_image_url = jsonChild.getString("goods_image_url");
-		ImageLoader.getInstance().displayImage(goods_image_url, viewHolder.im_shangpuimg);//设置商品图片
+		ImageLoader.getInstance().displayImage(goods_image_url, viewHolder.im_shangpuimg, ImageOptions.getOpstion(), animateFirstListener);//设置商品图片
 		viewHolder.childrenNameTV.setText(jsonChild.getString("goods_name"));//设置商品名称
 		viewHolder.tv_goods_price.setText("￥"+jsonChild.getString("goods_price"));//设置商品价格
 		viewHolder.tv_goods_num.setText("X"+jsonChild.getString("goods_num"));//设置商品数量

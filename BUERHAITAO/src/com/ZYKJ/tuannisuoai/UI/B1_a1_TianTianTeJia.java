@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -36,6 +37,8 @@ public class B1_a1_TianTianTeJia extends BaseActivity implements IXListViewListe
 	private MyListView listview_b1_a1_dayspecial;
 	private List<Map<String, String>> data = new ArrayList<Map<String, String>>();
 	private B1_a1_DaySpecialAdapter dayspecialadapter;
+	int curpage=1;
+	private Handler mHandler = new Handler();//异步加载或刷新
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,7 +54,7 @@ public class B1_a1_TianTianTeJia extends BaseActivity implements IXListViewListe
 		listview_b1_a1_dayspecial.setRefreshTime();
 		RequestDailog.showDialog(this, "正在加载数据，请稍后");
 //		HttpUtils.getDaySpecial(res_dayspecial, "0","88","1","1");
-		HttpUtils.getDaySpecial(res_dayspecial, "0",getSharedPreferenceValue("cityid"),getSharedPreferenceValue("lng"),getSharedPreferenceValue("lat"));
+		HttpUtils.getDaySpecial(res_dayspecial, String.valueOf(curpage),getSharedPreferenceValue("cityid"),getSharedPreferenceValue("lng"),getSharedPreferenceValue("lat"));
 		listview_b1_a1_dayspecial.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -98,7 +101,11 @@ public class B1_a1_TianTianTeJia extends BaseActivity implements IXListViewListe
 				try {
 					org.json.JSONArray array = datas.getJSONArray("day_special");
 					Tools.Log("res_Points_array="+array);
-					data.clear();
+					if (curpage>1) {
+						
+					}else {
+						data.clear();
+					}
 					for (int i = 0; i < array.length(); i++) {
 						JSONObject jsonItem = array.getJSONObject(i);
 						Map<String, String> map = new HashMap();
@@ -144,12 +151,34 @@ public class B1_a1_TianTianTeJia extends BaseActivity implements IXListViewListe
 	public void onRefresh(int id) {
 		// TODO Auto-generated method stub
 		RequestDailog.showDialog(this, "正在加载数据，请稍后");
-		HttpUtils.getDaySpecial(res_dayspecial, "0",getSharedPreferenceValue("cityid"),getSharedPreferenceValue("lng"),getSharedPreferenceValue("lat"));
+		/**下拉刷新 重建*/
+		mHandler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+					curpage = 1;
+					HttpUtils.getDaySpecial(res_dayspecial, String.valueOf(curpage),getSharedPreferenceValue("cityid"),getSharedPreferenceValue("lng"),getSharedPreferenceValue("lat"));
+					onLoad();
+			}
+		}, 1000);
 	}
 
 	@Override
 	public void onLoadMore(int id) {
-		// TODO Auto-generated method stub
-//		Toast.makeText(this, "只有这么多数据", Toast.LENGTH_LONG).show();
+		/**上拉加载分页*/
+		mHandler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+					curpage += 1;
+					HttpUtils.getDaySpecial(res_dayspecial, String.valueOf(curpage),getSharedPreferenceValue("cityid"),getSharedPreferenceValue("lng"),getSharedPreferenceValue("lat"));
+					onLoad();
+			}
+		}, 1000);		
 	}
+
+	private void onLoad() {
+		listview_b1_a1_dayspecial.stopRefresh();
+		listview_b1_a1_dayspecial.stopLoadMore();
+		listview_b1_a1_dayspecial.setRefreshTime();
+	}
+	
 }

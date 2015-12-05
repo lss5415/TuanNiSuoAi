@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -37,6 +38,8 @@ public class B1_a2_CaiNiXiHuan extends BaseActivity implements
 	private MyListView listview_b1_a2_like;
 	private List<Map<String, String>> data = new ArrayList<Map<String, String>>();
 	private B1_a2_CaiNiLikeAdapter cainilikeadapter; 
+	int curpage=1;
+	private Handler mHandler = new Handler();//异步加载或刷新
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,7 +56,7 @@ public class B1_a2_CaiNiXiHuan extends BaseActivity implements
 		listview_b1_a2_like.setRefreshTime();
 		RequestDailog.showDialog(this, "正在加载数据，请稍后");
 //		HttpUtils.getCaiNiLike(res_cnlike, "1", "1", "88", "0");
-		HttpUtils.getCaiNiLike(res_cnlike,getSharedPreferenceValue("lng"),getSharedPreferenceValue("lat"),getSharedPreferenceValue("cityid"), "0");
+		HttpUtils.getCaiNiLike(res_cnlike,getSharedPreferenceValue("lng"),getSharedPreferenceValue("lat"),getSharedPreferenceValue("cityid"), String.valueOf(curpage));
 		listview_b1_a2_like.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -99,7 +102,11 @@ public class B1_a2_CaiNiXiHuan extends BaseActivity implements
 				try {
 					org.json.JSONArray array = datas.getJSONArray("goods_list");
 					Tools.Log("res_Points_array=" + array);
-					data.clear();
+					if (curpage>1) {
+						
+					}else {
+						data.clear();
+					}
 					for (int i = 0; i < array.length(); i++) {
 						JSONObject jsonItem = array.getJSONObject(i);
 						Map<String, String> map = new HashMap();
@@ -143,17 +150,35 @@ public class B1_a2_CaiNiXiHuan extends BaseActivity implements
 
 		}
 	}
-
 	@Override
 	public void onRefresh(int id) {
-		// TODO Auto-generated method stub
-		RequestDailog.showDialog(this, "正在加载数据，请稍后");
-		HttpUtils.getCaiNiLike(res_cnlike, "1", "1", "88", "0");
-	}
+		/**下拉刷新 重建*/
+		mHandler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+					curpage = 1;
+					HttpUtils.getCaiNiLike(res_cnlike,getSharedPreferenceValue("lng"),getSharedPreferenceValue("lat"),getSharedPreferenceValue("cityid"), String.valueOf(curpage));
+					onLoad();
+			}
+		}, 1000);
 
+	}
 	@Override
 	public void onLoadMore(int id) {
-		// TODO Auto-generated method stub
-		// Toast.makeText(this, "只有这么多数据", Toast.LENGTH_LONG).show();
+		/**上拉加载分页*/
+		mHandler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+					curpage += 1;
+					HttpUtils.getCaiNiLike(res_cnlike,getSharedPreferenceValue("lng"),getSharedPreferenceValue("lat"),getSharedPreferenceValue("cityid"), String.valueOf(curpage));
+					onLoad();
+			}
+		}, 1000);		
+	}
+
+	private void onLoad() {
+		listview_b1_a2_like.stopRefresh();
+		listview_b1_a2_like.stopLoadMore();
+		listview_b1_a2_like.setRefreshTime();
 	}
 }

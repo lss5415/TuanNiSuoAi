@@ -13,12 +13,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ZYKJ.tuannisuoai.R;
+import com.ZYKJ.tuannisuoai.utils.AnimateFirstDisplayListener;
+import com.ZYKJ.tuannisuoai.utils.ImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 public class B5_5_OrderDetailAdapter extends BaseAdapter {
 	
 	private Activity c;
 	JSONArray extend_order_goods;
+	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
     
 	public B5_5_OrderDetailAdapter(Activity c, JSONArray extend_order_goods) {
 		this.c = c;
@@ -66,7 +70,7 @@ public class B5_5_OrderDetailAdapter extends BaseAdapter {
         	try {
 				JSONObject  extend_order_goods1 = (JSONObject) extend_order_goods.get(position);
 				String goods_image_url = extend_order_goods1.getString("image_60_url");
-				ImageLoader.getInstance().displayImage(goods_image_url, viewHolder.iv_product);//设置产品图片
+				ImageLoader.getInstance().displayImage(goods_image_url, viewHolder.iv_product, ImageOptions.getOpstion(), animateFirstListener);//设置产品图片
 				viewHolder.tv_productName.setText(extend_order_goods1.getString("goods_name").toString());//设置产品名称
 				viewHolder.tv_goodsprice.setText("￥"+extend_order_goods1.getString("goods_price").toString());//设置产品价格
 				viewHolder.tv_number.setText("X"+extend_order_goods1.getString("goods_num").toString());

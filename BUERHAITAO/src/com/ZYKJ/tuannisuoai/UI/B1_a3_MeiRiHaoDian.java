@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -36,6 +37,8 @@ public class B1_a3_MeiRiHaoDian extends BaseActivity implements IXListViewListen
 	private MyListView listview_b1_a3_goodstore;
 	private List<Map<String, String>> data = new ArrayList<Map<String, String>>();
 	private B1_a3_MeiRiHaoDianAdapter goodstoredapter;
+	int curpage=1;
+	private Handler mHandler = new Handler();//异步加载或刷新
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,7 +54,7 @@ public class B1_a3_MeiRiHaoDian extends BaseActivity implements IXListViewListen
 		listview_b1_a3_goodstore.setRefreshTime();
 		RequestDailog.showDialog(this, "正在加载数据，请稍后");
 //		HttpUtils.getGoodStore(res_goodstore, "5","0","88","80", "100");
-		HttpUtils.getGoodStore(res_goodstore, "5","0",getSharedPreferenceValue("cityid"),getSharedPreferenceValue("lng"),getSharedPreferenceValue("lat"));
+		HttpUtils.getGoodStore(res_goodstore, "5",String.valueOf(curpage),getSharedPreferenceValue("cityid"),getSharedPreferenceValue("lng"),getSharedPreferenceValue("lat"));
 		listview_b1_a3_goodstore.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -98,7 +101,11 @@ public class B1_a3_MeiRiHaoDian extends BaseActivity implements IXListViewListen
 				try {
 					org.json.JSONArray array = datas.getJSONArray("store_list");
 					Tools.Log("res_Points_array="+array);
-					data.clear();
+					if (curpage>1) {
+						
+					}else {
+						data.clear();
+					}
 					for (int i = 0; i < array.length(); i++) {
 						JSONObject jsonItem = array.getJSONObject(i);
 						Map<String, String> map = new HashMap(); 
@@ -138,17 +145,35 @@ public class B1_a3_MeiRiHaoDian extends BaseActivity implements IXListViewListen
 			
 		}
 	}
-
 	@Override
 	public void onRefresh(int id) {
-		// TODO Auto-generated method stub
-		RequestDailog.showDialog(this, "正在加载数据，请稍后");
-		HttpUtils.getGoodStore(res_goodstore, "5","0","88","80", "100");
-	}
+		/**下拉刷新 重建*/
+		mHandler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+					curpage = 1;
+					HttpUtils.getGoodStore(res_goodstore, "5",String.valueOf(curpage),getSharedPreferenceValue("cityid"),getSharedPreferenceValue("lng"),getSharedPreferenceValue("lat"));
+					onLoad();
+			}
+		}, 1000);
 
+	}
 	@Override
 	public void onLoadMore(int id) {
-		// TODO Auto-generated method stub
-//		Toast.makeText(this, "只有这么多数据", Toast.LENGTH_LONG).show();
+		/**上拉加载分页*/
+		mHandler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+					curpage += 1;
+					HttpUtils.getGoodStore(res_goodstore, "5",String.valueOf(curpage),getSharedPreferenceValue("cityid"),getSharedPreferenceValue("lng"),getSharedPreferenceValue("lat"));
+					onLoad();
+			}
+		}, 1000);		
+	}
+
+	private void onLoad() {
+		listview_b1_a3_goodstore.stopRefresh();
+		listview_b1_a3_goodstore.stopLoadMore();
+		listview_b1_a3_goodstore.setRefreshTime();
 	}
 }

@@ -32,7 +32,9 @@ import com.ZYKJ.tuannisuoai.R;
 import com.ZYKJ.tuannisuoai.adapter.B0_StoreInfoAdapter;
 import com.ZYKJ.tuannisuoai.adapter.IndexPageAdapter2;
 import com.ZYKJ.tuannisuoai.base.BaseActivity;
+import com.ZYKJ.tuannisuoai.utils.AnimateFirstDisplayListener;
 import com.ZYKJ.tuannisuoai.utils.HttpUtils;
+import com.ZYKJ.tuannisuoai.utils.ImageOptions;
 import com.ZYKJ.tuannisuoai.utils.Tools;
 import com.ZYKJ.tuannisuoai.view.MyListView;
 import com.ZYKJ.tuannisuoai.view.RequestDailog;
@@ -40,6 +42,7 @@ import com.alibaba.fastjson.JSONException;
 import com.external.maxwin.view.XListView.IXListViewListener;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 /**
  * @author lss 2015年6月29日 店铺详情
@@ -84,6 +87,7 @@ public class BX_DianPuXiangQingActivity extends BaseActivity implements IXListVi
 	String endlat,endlng,isshoucang="false";
 	private int curpage = 1;//当前页
 	JSONObject datas = null;
+	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -226,7 +230,7 @@ public class BX_DianPuXiangQingActivity extends BaseActivity implements IXListVi
 					}else {
 						im_storeshoucang.setImageDrawable(getResources().getDrawable(R.drawable.storeyishoucang));
 					}
-					ImageLoader.getInstance().displayImage(obj.getString("store_avatar"), im_xiao_xqback);
+					ImageLoader.getInstance().displayImage(obj.getString("store_avatar"), im_xiao_xqback, ImageOptions.getOpstion(), animateFirstListener);
 					rb_dpxiangqing_rating_bar.setRating(Float.parseFloat(obj.getString("store_credit_composite")));
 					tv_store_address.setText(obj.getString("location"));
 					endlat = obj.getString("lat");

@@ -24,11 +24,14 @@ import android.widget.Toast;
 import com.ZYKJ.tuannisuoai.R;
 import com.ZYKJ.tuannisuoai.data.ChildrenItem;
 import com.ZYKJ.tuannisuoai.data.GroupItem;
+import com.ZYKJ.tuannisuoai.utils.AnimateFirstDisplayListener;
 import com.ZYKJ.tuannisuoai.utils.HttpUtils;
+import com.ZYKJ.tuannisuoai.utils.ImageOptions;
 import com.ZYKJ.tuannisuoai.view.RequestDailog;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 public class B3_ShpppingCartAdapter extends BaseExpandableListAdapter{
 	private List<GroupItem> dataList;
@@ -48,6 +51,7 @@ public class B3_ShpppingCartAdapter extends BaseExpandableListAdapter{
 	private JsonHttpResponseHandler res_delete;
 	private JsonHttpResponseHandler res_add;
 	private RefreshExpandableList refresh;
+	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
 	public B3_ShpppingCartAdapter(Context context, List<GroupItem> dataList,int ischecked,int sumtiaoshu,RefreshExpandableList refresh,String key) {
 		this.dataList = dataList;//购物车列表
@@ -102,7 +106,7 @@ public class B3_ShpppingCartAdapter extends BaseExpandableListAdapter{
 			viewHolder = (ChildViewHolder) convertView.getTag();
 		}
 		viewHolder.childrenNameTV.setText(childrenItem.getGoods_name());
-		ImageLoader.getInstance().displayImage(childrenItem.getGoods_image_url(), viewHolder.im_shangpuimg);
+		ImageLoader.getInstance().displayImage(childrenItem.getGoods_image_url(), viewHolder.im_shangpuimg, ImageOptions.getOpstion(), animateFirstListener);
 		viewHolder.tv_spec.setText(childrenItem.getGoods_spec());
 		viewHolder.tv_editguige.setText(childrenItem.getGoods_spec());
 		viewHolder.tv_goods_price.setText(childrenItem.getGoods_price());

@@ -8,9 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.ZYKJ.tuannisuoai.utils.AnimateFirstDisplayListener;
 import com.ZYKJ.tuannisuoai.utils.ImageOptions;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 public class IndexPageAdapter2 extends RecyclingPagerAdapter {
 //	private List<Carousels> data;
@@ -18,6 +20,7 @@ public class IndexPageAdapter2 extends RecyclingPagerAdapter {
 	private Context context;
 	// 下载图片的属性
 	private DisplayImageOptions m_options;
+	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
 	public IndexPageAdapter2(Context context, JSONArray datsj) {
 		this.datsj = datsj;
@@ -73,7 +76,8 @@ public class IndexPageAdapter2 extends RecyclingPagerAdapter {
 				e.printStackTrace();
 			}
 		}
-		ImageLoader.getInstance().displayImage(aaa, holder.imageView);
+		ImageLoader.getInstance().displayImage(aaa, holder.imageView, ImageOptions.getOpstion(), animateFirstListener);
+//		ImageLoader.getInstance().displayImage(holder.imageView,  aaa, ImageOptions.getOpstion(), animateFirstListener);
 		return convertView;
 	}
 

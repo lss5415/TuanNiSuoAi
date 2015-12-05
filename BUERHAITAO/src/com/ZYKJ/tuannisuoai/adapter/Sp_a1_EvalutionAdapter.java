@@ -14,7 +14,10 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.ZYKJ.tuannisuoai.R;
+import com.ZYKJ.tuannisuoai.utils.AnimateFirstDisplayListener;
+import com.ZYKJ.tuannisuoai.utils.ImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 /**
  * @author lss 2015年7月3日   商品评价Adapter
@@ -23,6 +26,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 public class Sp_a1_EvalutionAdapter extends BaseAdapter {
 	private Activity context;
 	List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
+	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
 	public Sp_a1_EvalutionAdapter(Activity context, List<Map<String, Object>> data) {
 		this.context = context;
@@ -63,7 +67,7 @@ public class Sp_a1_EvalutionAdapter extends BaseAdapter {
 		}else{
 			ViewHolder=(ViewHolder) convertView.getTag();
 		}
-		ImageLoader.getInstance().displayImage((String)data.get(position).get("geval_avatar"), ViewHolder.im_sp_a1_userimage);
+		ImageLoader.getInstance().displayImage((String)data.get(position).get("geval_avatar"), ViewHolder.im_sp_a1_userimage, ImageOptions.getOpstion(), animateFirstListener);
 		ViewHolder.tv_sp_a1_username.setText(data.get(position).get("geval_frommembername").toString());
 		ViewHolder.rating_bar_sp_a1_xiangqing.setRating(Float.parseFloat(data.get(position).get("geval_scores").toString()));	
 		ViewHolder.tv_sp_a1_pingjia.setText(data.get(position).get("geval_content").toString());

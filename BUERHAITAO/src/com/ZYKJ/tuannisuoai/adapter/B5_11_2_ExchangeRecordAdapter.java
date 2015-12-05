@@ -13,7 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ZYKJ.tuannisuoai.R;
+import com.ZYKJ.tuannisuoai.utils.AnimateFirstDisplayListener;
+import com.ZYKJ.tuannisuoai.utils.ImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 public class B5_11_2_ExchangeRecordAdapter extends BaseAdapter {
 	
@@ -25,6 +28,7 @@ public class B5_11_2_ExchangeRecordAdapter extends BaseAdapter {
 	private String pgoods_body=null;//产品介绍
 	private String pgoods_points=null;//产品积分
 	private String point_addtime=null;//订单生成时间
+	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	
 	public B5_11_2_ExchangeRecordAdapter(Activity c, List<Map<String, String>> data) {
 		this.c = c;
@@ -70,7 +74,7 @@ public class B5_11_2_ExchangeRecordAdapter extends BaseAdapter {
 		tv_productName.setText(pgoods_name);
 		tv_productPoints.setText(pgoods_points);
 		tv_recorddate.setText(point_addtime);
-		ImageLoader.getInstance().displayImage(data.get(position).get("point_goodsimage"), iv_product);
+		ImageLoader.getInstance().displayImage(data.get(position).get("point_goodsimage"), iv_product, ImageOptions.getOpstion(), animateFirstListener);
 		return cellView;
 	}
 }

@@ -20,7 +20,10 @@ import android.widget.TextView;
 
 import com.ZYKJ.tuannisuoai.R;
 import com.ZYKJ.tuannisuoai.UI.B5_11_1_ExchangeDetail;
+import com.ZYKJ.tuannisuoai.utils.AnimateFirstDisplayListener;
+import com.ZYKJ.tuannisuoai.utils.ImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 public class B5_11_PointsMallAdapter extends BaseAdapter {
 	
@@ -31,6 +34,7 @@ public class B5_11_PointsMallAdapter extends BaseAdapter {
 	private String pgoods_name=null;//产品名字
 	private String pgoods_body=null;//产品介绍
 	private String pgoods_points=null;//产品积分
+	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	
 	public B5_11_PointsMallAdapter(Activity c, List<Map<String, String>> data) {
 		this.c = c;
@@ -78,7 +82,7 @@ public class B5_11_PointsMallAdapter extends BaseAdapter {
 		tv_productName.setText(pgoods_name);
 		tv_productIntro.setText(pgoods_body);
 		tv_productPoints.setText(pgoods_points);
-		ImageLoader.getInstance().displayImage(data.get(position).get("pgoods_image"), iv_product);
+		ImageLoader.getInstance().displayImage(data.get(position).get("pgoods_image"), iv_product, ImageOptions.getOpstion(), animateFirstListener);
 		return cellView;
 	}
 	/**

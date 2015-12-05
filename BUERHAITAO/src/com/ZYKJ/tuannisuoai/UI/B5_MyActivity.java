@@ -37,14 +37,17 @@ import android.widget.Toast;
 
 import com.ZYKJ.tuannisuoai.R;
 import com.ZYKJ.tuannisuoai.base.BaseActivity;
+import com.ZYKJ.tuannisuoai.utils.AnimateFirstDisplayListener;
 import com.ZYKJ.tuannisuoai.utils.CircularImage;
 import com.ZYKJ.tuannisuoai.utils.HttpUtils;
+import com.ZYKJ.tuannisuoai.utils.ImageOptions;
 import com.ZYKJ.tuannisuoai.utils.Tools;
 import com.ZYKJ.tuannisuoai.view.RequestDailog;
 import com.ZYKJ.tuannisuoai.view.ToastView;
 import com.ZYKJ.tuannisuoai.view.UIDialog;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 @SuppressLint("NewApi") public class B5_MyActivity extends BaseActivity implements OnClickListener {
 
@@ -77,6 +80,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 	private int ISLOGIN=0;
 	
 	public String usernameString=null;
+	private Button signIn;
+	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
     
 	@Override
 	protected void onResume() {
@@ -94,7 +99,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 //			    
 //			}
 			//网络加载头像
-			ImageLoader.getInstance().displayImage(getSharedPreferenceValue("avatar"), img_head);
+			ImageLoader.getInstance().displayImage(getSharedPreferenceValue("avatar"), img_head, ImageOptions.getOpstion(), animateFirstListener);
 		}else if (FirstLog==0) {//第一次进来，如果没有登录，跳转到登录页面
 			Intent intent_login1=new Intent();
 			intent_login1.setClass(this, B5_1_LoginActivity.class);
@@ -126,6 +131,14 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 		my_set_page=(RelativeLayout) findViewById(R.id.my_set_page);
 		tv_my_points=(TextView) findViewById(R.id.tv_my_points);
 		my_money=(TextView) findViewById(R.id.my_money);
+		signIn=(Button) findViewById(R.id.signIn);
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");    
+		String time=sdf.format(new java.util.Date());
+		String sds = getSharedPreferenceValue("shijian");
+		if (getSharedPreferenceValue("shijian").equals(time)) {
+			btn_chackInShape.setVisibility(View.GONE);
+			signIn.setText("今日已签到！");
+		}
 		
 		if (isLogin()) {
 			if (getSharedPreferenceValue("username")!="") {
@@ -256,8 +269,22 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 				startActivity(itshaidanquan);
 				break;
 			case R.id.btn_chackInShape://签到
-				RequestDailog.showDialog(this, "正在签到，请稍后");
+
+				SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");    
+				String shijian=sdf.format(new java.util.Date());   
+				putSharedPreferenceValue("shijian", shijian);
+				btn_chackInShape.setVisibility(View.GONE);
+				signIn.setText("今日已签到！");
 				HttpUtils.chackIn(res_chackin, getSharedPreferenceValue("key"));
+//				String qiandao = getSharedPreferenceValue("qiandao");
+//				if (qiandao.equals("已签到")) {
+//					
+//				}
+//				
+//				RequestDailog.showDialog(this, "正在签到，请稍后");
+//				btn_chackInShape.setVisibility(View.GONE);
+//				signIn.setText("今日已签到！");
+//				HttpUtils.chackIn(res_chackin, getSharedPreferenceValue("key"));
 				break;
 			case R.id.ll_NoPay://待付款
 				Intent intent_daifukuan=new Intent();
@@ -625,8 +652,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 		// 下面这个crop=true是设置在开启的Intent中设置显示的VIEW可裁剪
 		intent.putExtra("crop", "true");
 		// aspectX aspectY 是宽高的比例
-		intent.putExtra("aspectX", 1);
-		intent.putExtra("aspectY", 1);
+//		intent.putExtra("aspectX", 1);
+//		intent.putExtra("aspectY", 1);
 		// outputX outputY 是裁剪图片宽高
 		intent.putExtra("outputX", 150);
 		intent.putExtra("outputY", 150);

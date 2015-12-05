@@ -32,11 +32,14 @@ import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 import com.ZYKJ.tuannisuoai.R;
 import com.ZYKJ.tuannisuoai.adapter.IndexPageAdapter1;
 import com.ZYKJ.tuannisuoai.base.BaseActivity;
+import com.ZYKJ.tuannisuoai.utils.AnimateFirstDisplayListener;
 import com.ZYKJ.tuannisuoai.utils.HttpUtils;
+import com.ZYKJ.tuannisuoai.utils.ImageOptions;
 import com.ZYKJ.tuannisuoai.utils.Tools;
 import com.ZYKJ.tuannisuoai.view.RequestDailog;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 /**
  * @author lss 2015年7月1日 商品详情
@@ -63,7 +66,7 @@ public class Sp_GoodsInfoActivity extends BaseActivity {
 	// 已售件数
 	private TextView tv_yishoujian;
 	// 浏览量
-	private TextView tv_liulancount;
+//	private TextView tv_liulancount;
 	// 选择规格类型
 	private RelativeLayout rl_chooseleixing;
 	// 宝贝评价(1731)
@@ -112,6 +115,7 @@ public class Sp_GoodsInfoActivity extends BaseActivity {
 	/** 当前的位置 */
 	private int now_pos = 0;
 	private WebView webView;
+	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -130,7 +134,7 @@ public class Sp_GoodsInfoActivity extends BaseActivity {
 		tv_shichangjia = (TextView) findViewById(R.id.tv_shichangjia);
 		tv_sp_ssejfl = (TextView) findViewById(R.id.tv_sp_ssejfl);
 		tv_yishoujian = (TextView) findViewById(R.id.tv_yishoujian);
-		tv_liulancount = (TextView) findViewById(R.id.tv_liulancount);
+//		tv_liulancount = (TextView) findViewById(R.id.tv_liulancount);
 		rl_chooseleixing = (RelativeLayout) findViewById(R.id.rl_chooseleixing);
 		tv_sp_babypingjia = (TextView) findViewById(R.id.tv_sp_babypingjia);
 		tv_zongpinfen = (TextView) findViewById(R.id.tv_zongpinfen);
@@ -154,12 +158,14 @@ public class Sp_GoodsInfoActivity extends BaseActivity {
 
 		webView = (WebView) findViewById(R.id.webView);
 
-		String url = "http://115.28.21.137/mobile/index.php?act=goods&op=goods_body&goods_id="
+		String url = "http://115.28.21.137:89/mobile/index.php?act=goods&op=goods_body&goods_id="
 				+ goods_id;
 		webView.loadUrl(url);
 		WebSettings webSettings = webView.getSettings();
+		webSettings.setUseWideViewPort(true);
+		webSettings.setLoadWithOverviewMode(true);
 		webSettings.setJavaScriptEnabled(true);
-		webSettings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
+//		webSettings.setLayoutAlgorithm(LayoutAlgorithm.NARROW_COLUMNS);
 		webView.setWebViewClient(new WebViewClient() {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -173,7 +179,7 @@ public class Sp_GoodsInfoActivity extends BaseActivity {
 		viewPager = (AutoScrollViewPager) findViewById(R.id.index_viewpage);
 		LayoutParams pageParms = viewPager.getLayoutParams();
 		pageParms.width = Tools.M_SCREEN_WIDTH;
-		pageParms.height = Tools.M_SCREEN_WIDTH*2/3;
+		pageParms.height = Tools.M_SCREEN_WIDTH;
 
 		viewPager.setInterval(2000);
 		viewPager.startAutoScroll();
@@ -394,7 +400,7 @@ public class Sp_GoodsInfoActivity extends BaseActivity {
 			// JSONArray jsonarray = xuanxiang.getJSONArray("1");
 			JSONArray jsonarray = xuanxiang.getJSONArray(leixing1
 					.getJSONObject(0).getString("id").toString());
-			List<String> list = new ArrayList<String>();
+			/*List<String> list = new ArrayList<String>();
 			for (int i = 0; i < jsonarray.length(); i++) {
 				try {
 					list.add(jsonarray.getString(i));
@@ -402,9 +408,11 @@ public class Sp_GoodsInfoActivity extends BaseActivity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
-			String[] stringArray = list.toArray(new String[list.size()]);
-			itaddcar1.putExtra("arry1", stringArray);
+			}*/
+			itaddcar1.putExtra("arry1", jsonarray.toString());
+			
+//			String[] stringArray = list.toArray(new String[list.size()]);
+//			itaddcar1.putExtra("arry1", stringArray);
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -483,8 +491,8 @@ public class Sp_GoodsInfoActivity extends BaseActivity {
 					tv_yishoujian.setText("已售"
 							+ jsonItem.getString("goods_salenum") + "件");
 					// 浏览量
-					tv_liulancount.setText("浏览 "
-							+ jsonItem.getString("goods_click"));
+//					tv_liulancount.setText("浏览 "
+//							+ jsonItem.getString("goods_click"));
 					// 选择规格类型
 					// rl_chooseleixing
 					// 宝贝评价(1731)
@@ -502,7 +510,7 @@ public class Sp_GoodsInfoActivity extends BaseActivity {
 						// 用户头像
 						ImageLoader.getInstance().displayImage(
 								(String) jsonitemz.getString("geval_avatar"),
-								im_userimage);
+								im_userimage, ImageOptions.getOpstion(), animateFirstListener);
 						// 用户名称
 						tv_username.setText(jsonitemz
 								.getString("geval_frommembername"));
@@ -656,4 +664,13 @@ public class Sp_GoodsInfoActivity extends BaseActivity {
 			}
 		}
 	};
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		webView.destroy();
+	}
+	
+	
+	
 }

@@ -14,7 +14,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ZYKJ.tuannisuoai.R;
+import com.ZYKJ.tuannisuoai.utils.AnimateFirstDisplayListener;
+import com.ZYKJ.tuannisuoai.utils.ImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 /**
  * @author lss 2015年6月24日  猜你喜欢Adapter
@@ -23,6 +26,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 public class B1_a2_CaiNiLikeAdapter extends BaseAdapter {
 	private Activity context;
 	List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
 	public B1_a2_CaiNiLikeAdapter(Activity context, List<Map<String, String>> data) {
 		this.context = context;
@@ -69,7 +73,7 @@ public class B1_a2_CaiNiLikeAdapter extends BaseAdapter {
 		}else{
 			ViewHolder=(ViewHolder) convertView.getTag();
 		}
-		ImageLoader.getInstance().displayImage((String)data.get(position).get("goods_image"), ViewHolder.im_a2_pic);
+		ImageLoader.getInstance().displayImage((String)data.get(position).get("goods_image"), ViewHolder.im_a2_pic, ImageOptions.getOpstion(), animateFirstListener);
 		ViewHolder.tv_a2_chanpinname.setText(data.get(position).get("goods_name"));
 		ViewHolder.tv_a2_juli.setText(data.get(position).get("juli"));
 		ViewHolder.tv_a2_chanpinjianjie.setText(data.get(position).get("goods_jingle"));

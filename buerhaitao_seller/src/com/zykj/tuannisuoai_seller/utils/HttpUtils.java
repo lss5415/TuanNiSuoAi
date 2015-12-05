@@ -363,6 +363,18 @@ public class HttpUtils {
 	}
 
 	/**
+	 * 编辑产品
+	 * 
+	 * @param res
+	 * @param page 每页数量
+	 * @param curpage 当前页码
+	 */
+	public static void getEditProduct(AsyncHttpResponseHandler res,String commonid,String key) {
+		String url = base_url + "index.php?act=seller_goods&op=edit_goods&commonid="+commonid+ "&key="+ key;
+		client.get(url, res);
+	}
+
+	/**
 	 * 获取地区列表
 	 * 
 	 * @param res
@@ -1516,6 +1528,66 @@ public class HttpUtils {
 		String url = base_url + "index.php?act=seller_goods&op=goods_add";
 		RequestParams params = new RequestParams();
 		params.put("key",key);
+		params.put("cate_id",cate_id);
+		params.put("cate_name",cate_name);
+		params.put("g_name",g_name);
+		params.put("sp_name",sp_name);
+		params.put("sp_value",sp_value);
+		params.put("spec",spec);
+		params.put("goods_jingle",goods_jingle);
+		params.put("image_path",image_path);
+		params.put("image_all",image_all);
+		client.post(url, params,res);
+	}
+	
+	/**
+	 *  无型号商品编辑发布
+	 * @param key 当前登录令牌key 商家登录令牌
+	 * @param cate_id 商品分类编号
+	 * @param cate_name 商品分类名称 例：服饰鞋帽&gt;女装
+	 * @param g_name 商品名称
+	 * @param g_price 商品价格
+	 * @param goods_promotion_price 天天特价
+	 * @param g_storage 商品库存
+	 * @param goods_jingle 商品简介
+	 * @param image_path 商品主图文件名称
+	 * @param image_all 其它商品图文件名，用逗号分隔
+	 */
+	public static void ShangPinFaBuBianji(AsyncHttpResponseHandler res, String key,String goods_commonid,String cate_id,String cate_name,String g_name,String g_price,String goods_promotion_price,String g_storage,String goods_jingle,String image_path,String image_all) {
+		String url = base_url + "index.php?act=seller_goods&op=edit_save_goods";
+		RequestParams params = new RequestParams();
+		params.put("key",key);
+		params.put("goods_commonid",goods_commonid);
+		params.put("cate_id",cate_id);
+		params.put("cate_name",cate_name);
+		params.put("g_name",g_name);
+		params.put("g_price",g_price);
+		params.put("goods_promotion_price",goods_promotion_price);
+		params.put("g_storage",g_storage);
+		params.put("goods_jingle",goods_jingle);
+		params.put("image_path",image_path);
+		params.put("image_all",image_all);
+		client.post(url, params,res);
+	}
+	
+	/**
+	 * 单型号商品发布
+	 * @param key 当前登录令牌key 商家登录令牌
+	 * @param cate_id 商品分类编号
+	 * @param cate_name 商品分类名称 例：服饰鞋帽&gt;女装
+	 * @param g_name 商品名称
+	 * @param sp_name 规格名称，参见下方范例
+	 * @param sp_value 规格值，参见下方范例
+	 * @param spec 提交的规格，参见下方范例
+	 * @param goods_jingle 商品简介
+	 * @param image_path 商品主图文件名称
+	 * @param image_all 其它商品图文件名，用逗号分隔
+	 */
+	public static void ShangPinFaBuBianji1(AsyncHttpResponseHandler res, String key,String goods_commonid,String cate_id,String cate_name,String g_name,com.alibaba.fastjson.JSONObject sp_name,com.alibaba.fastjson.JSONObject sp_value,com.alibaba.fastjson.JSONObject spec,String goods_jingle,String image_path,String image_all) {
+		String url = base_url + "index.php?act=seller_goods&op=edit_save_goods";
+		RequestParams params = new RequestParams();
+		params.put("key",key);
+		params.put("goods_commonid",goods_commonid);
 		params.put("cate_id",cate_id);
 		params.put("cate_name",cate_name);
 		params.put("g_name",g_name);

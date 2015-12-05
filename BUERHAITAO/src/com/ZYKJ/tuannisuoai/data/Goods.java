@@ -25,6 +25,7 @@ public class Goods implements Serializable {
 	private String store_name;//店铺名称
 	private String goods_storage;//库存
 	private String is_special;
+	private String goods_promotion_price;//特价
 	
 	public String getStore_name() {
 		return store_name;
@@ -128,4 +129,11 @@ public class Goods implements Serializable {
 	public void setIs_special(String is_special) {
 		this.is_special = is_special;
 	}
+	public String getGoods_promotion_price() {
+		return goods_promotion_price;
+	}
+	public void setGoods_promotion_price(String goods_promotion_price) {
+		this.goods_promotion_price = goods_promotion_price;
+	}
+	
 }

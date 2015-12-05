@@ -25,7 +25,7 @@ import com.zykj.tuannisuoai_seller.utils.Tools;
  *
  */
 public class B0_MainActivity extends BaseTabActivity {
-	public TabHost m_tab;
+	public static TabHost m_tab;
 	private Intent intent_1;
 	private Intent intent_2;
 	private Intent intent_3;
@@ -94,6 +94,7 @@ public class B0_MainActivity extends BaseTabActivity {
 					}
 				}
 			});
+			m_tab.setCurrentTab(0);
 		}
 		else //未登录
 		{
@@ -134,4 +135,7 @@ public class B0_MainActivity extends BaseTabActivity {
 			return true;
 		}
    
+		public static void TiaoZhuan(int tabActivity){
+			m_tab.setCurrentTab(tabActivity);
+		}
 }

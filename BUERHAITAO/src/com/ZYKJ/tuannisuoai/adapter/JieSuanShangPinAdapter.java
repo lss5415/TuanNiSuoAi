@@ -14,12 +14,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ZYKJ.tuannisuoai.R;
+import com.ZYKJ.tuannisuoai.utils.AnimateFirstDisplayListener;
+import com.ZYKJ.tuannisuoai.utils.ImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 public class JieSuanShangPinAdapter extends BaseAdapter {
 	
 	private Activity c;
 	JSONArray goodsjsa;
+	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
     
 	public JieSuanShangPinAdapter(Activity c, JSONArray goodsjsa) {
 		this.c = c;
@@ -67,7 +71,7 @@ public class JieSuanShangPinAdapter extends BaseAdapter {
     	try {
 			JSONObject jobdata = (JSONObject) goodsjsa.get(position);
 			String goods_image_url = jobdata.getJSONObject("nameValuePairs").getString("goods_image_url");
-			ImageLoader.getInstance().displayImage(goods_image_url, viewHolder.im_shangpuimg);//设置商品图片
+			ImageLoader.getInstance().displayImage(goods_image_url, viewHolder.im_shangpuimg, ImageOptions.getOpstion(), animateFirstListener);//设置商品图片
 			viewHolder.childrenNameTV.setText(jobdata.getJSONObject("nameValuePairs").getString("goods_name").toString());//设置商品名称
 			viewHolder.tv_goods_price.setText("￥"+jobdata.getJSONObject("nameValuePairs").getString("goods_price").toString());//设置商品价格
 			viewHolder.tv_goods_num.setText("X"+jobdata.getJSONObject("nameValuePairs").getString("goods_num").toString());//设置商品数量

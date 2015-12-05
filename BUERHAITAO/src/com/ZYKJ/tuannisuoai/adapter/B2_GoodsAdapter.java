@@ -14,12 +14,16 @@ import android.widget.TextView;
 
 import com.ZYKJ.tuannisuoai.R;
 import com.ZYKJ.tuannisuoai.data.Goods;
+import com.ZYKJ.tuannisuoai.utils.AnimateFirstDisplayListener;
 import com.ZYKJ.tuannisuoai.utils.ImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 public class B2_GoodsAdapter extends BaseAdapter {
 
 	private List<Goods> list;
     private LayoutInflater inflater;
+	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	
 	
 	public B2_GoodsAdapter(Context context, List<Goods> list) {
@@ -64,16 +68,19 @@ public class B2_GoodsAdapter extends BaseAdapter {
         }
         Goods good = list.get(position);
         
-        ImageOptions.displayImage2Circle(holder.good_image, good.getGoods_image_url(), 10f);
+		ImageLoader.getInstance().displayImage(good.getGoods_image_url(), holder.good_image, ImageOptions.getOpstion(), animateFirstListener);
+//        ImageOptions.displayImage2Circle(holder.good_image, good.getGoods_image_url(), 10f);
         holder.good_name.setText(good.getGoods_name()+"");
         holder.good_juli.setText(good.getJuli()+"");
         holder.good_jingle.setText(good.getGoods_jingle()+"");
-        
-        holder.goods_price.setText(good.getGoods_price()+"");
-		if (good.getIs_special().equals("1")) {
-			holder.goods_price1.setVisibility(View.VISIBLE);
+//        goods_promotion_price
+        if (good.getIs_special().equals("1")) {
+            holder.goods_price.setText(good.getGoods_promotion_price()+"");
+        	holder.goods_price1.setVisibility(View.VISIBLE);
 			holder.goods_price1.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-			holder.goods_price1.setText("￥ "+good.getGoods_marketprice());
+			holder.goods_price1.setText("￥ "+good.getGoods_price());
+		}else {
+            holder.goods_price.setText(good.getGoods_price()+"");
 		}
         
         holder.tv_dianpuming.setText(good.getStore_name()+"");
