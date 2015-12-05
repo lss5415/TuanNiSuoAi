@@ -33,30 +33,41 @@
             android:padding="5dp"
             android:src="@drawable/symbol_left1" />
     </RelativeLayout>
-    <!-- 商品展示 -->
 
     <RelativeLayout
-        android:id="@+id/relativeLayout4"
+        android:id="@+id/commentorder"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/relativeLayout3"
-        android:layout_marginTop="24dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
         android:background="@color/white" >
+
+        <Button
+            android:id="@+id/btn_addComment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_btn_background_yellow"
+            android:text="确定评价"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
     </RelativeLayout>
-<RelativeLayout  
-    android:layout_below="@+id/relativeLayout1"
-    android:id="@+id/listview_goodslist1"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <ListView
-        android:id="@+id/listview_goodslist"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1">
-    </ListView>
-</RelativeLayout >
+
+    <RelativeLayout
+        android:id="@+id/listview_goodslist1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/commentorder"
+        android:layout_below="@id/relativeLayout1"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/listview_goodslist"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relativeLayout3"
@@ -64,7 +75,8 @@
         android:layout_height="40dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/listview_goodslist1"
-        android:background="@color/white" >
+        android:background="@color/white"
+        android:visibility="gone" >
 
         <TextView
             android:id="@+id/tv_orderprice_c"
@@ -85,17 +97,5 @@
             android:layout_toLeftOf="@+id/tv_orderprice_c"
             android:text="共X件商品" />
     </RelativeLayout>
-
-    <View
-        android:id="@+id/v1"
-        android:layout_width="10dp"
-        android:layout_height="30dp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/relativeLayout3"
-        android:background="@color/theme_grey" />
 
 </RelativeLayout>
