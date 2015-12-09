@@ -8,7 +8,8 @@
             android:layout_width="wrap_content"
             android:layout_height="1dp"
         />
-    <RelativeLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="107dp"
         android:background="@color/white" >
@@ -109,7 +110,7 @@
         android:layout_marginLeft="12dp"
         android:layout_marginTop="13dp"
         android:layout_toLeftOf="@+id/v1"
-        android:ems="10"
+        android:gravity="top"
         android:hint="亲，写点儿什么吧，您的意见对其他淘友有很大帮助！" />
 
     <View
@@ -132,23 +133,12 @@
 	<View 
 	    android:layout_width="match_parent"
         android:layout_height="3dp"/>
-	 <RelativeLayout
-        android:id="@+id/commentorder"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:background="@color/white" >
-
-        <Button
-            android:id="@+id/btn_addComment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_centerVertical="true"
-            android:background="@drawable/shape_btn_background_yellow"
-            android:text="确定评价"
-            android:textColor="@color/white" />
-    </RelativeLayout>
+	<GridView
+	    android:id="@+id/btn_addComment"
+	    android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="4"
+        android:stretchMode="columnWidth"
+        android:cacheColorHint="@android:color/transparent"
+        android:listSelector="@android:color/transparent"></GridView>
 </LinearLayout>

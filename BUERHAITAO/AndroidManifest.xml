@@ -390,7 +390,8 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".UI.B5_5_OrderDetail"></activity>
-        <activity android:name=".UI.B5_5_Comment_order"></activity>
+        <activity android:name=".UI.B5_5_Comment_order"
+            android:windowSoftInputMode="adjustPan"></activity>
     </application>
 
 </manifest>
