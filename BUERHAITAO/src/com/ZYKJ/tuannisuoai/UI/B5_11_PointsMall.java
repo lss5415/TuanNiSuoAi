@@ -134,14 +134,14 @@ public class B5_11_PointsMall extends BaseActivity implements IXListViewListener
 	@Override
 	public void onRefresh(int id) {
 		// TODO Auto-generated method stub
-		RequestDailog.showDialog(this, "正在加载数据，请稍后");
-		HttpUtils.pointsMall(res_pointsMall, getSharedPreferenceValue("key"));
+//		RequestDailog.showDialog(this, "正在加载数据，请稍后");
+//		HttpUtils.pointsMall(res_pointsMall, getSharedPreferenceValue("key"));
 	}
 	@Override
 	public void onLoadMore(int id) {
 		// TODO Auto-generated method stub
 //		Toast.makeText(this, "目前只有这些", Toast.LENGTH_LONG).show();
-		HttpUtils.pointsMall(res_pointsMall, getSharedPreferenceValue("key"));
+//		HttpUtils.pointsMall(res_pointsMall, getSharedPreferenceValue("key"));
 	}
 
 }

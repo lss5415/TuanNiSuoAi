@@ -72,7 +72,14 @@ public class B4_StoreActivity extends BaseActivity implements IXListViewListener
 		lng = getSharedPreferenceValue("lng");
 		lat = getSharedPreferenceValue("lat");
 		initView();
-        initPop();
+	    initPop();
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		cl_address.setText(getSharedPreferenceValue("cityname"));
 	}
 
 	/**

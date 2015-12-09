@@ -131,11 +131,29 @@ public class B5_12_SetActivity extends BaseActivity {
 								startActivity(intent_tomainavtivity);
 							}
 						});
-			} else // 注销失败
-			{
-				Tools.Notic(B5_12_SetActivity.this, error + "", null);
 			}
-
+			else //注销失败
+			{
+				if (error.equals("请登录")) {
+					Tools.Notic(B5_12_SetActivity.this, "请叫我请登录", null);
+					putSharedPreferenceValue("userid", "");
+					putSharedPreferenceValue("username", "");
+					putSharedPreferenceValue("mobile", "");
+					putSharedPreferenceValue("key", "");
+					Tools.Notic(B5_12_SetActivity.this, "注销成功", new OnClickListener() {
+						
+						@Override
+						public void onClick(View arg0) {
+							// TODO Auto-generated method stub
+							Intent  intent_tomainavtivity = new Intent(B5_12_SetActivity.this, B0_MainActivity.class);
+							startActivity(intent_tomainavtivity);
+						}
+					});
+				}else {
+					Tools.Notic(B5_12_SetActivity.this, error+"", null);
+				}
+			}
+			
 		}
 
 		@Override

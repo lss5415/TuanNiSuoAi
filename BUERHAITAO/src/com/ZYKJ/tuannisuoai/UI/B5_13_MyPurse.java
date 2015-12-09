@@ -65,7 +65,7 @@ public class B5_13_MyPurse extends BaseActivity {
 		et_chagenumber.setInputType(InputType.TYPE_CLASS_NUMBER);
 		btn_recharge = (Button) findViewById(R.id.btn_recharge);
 		setListener(mypurse_back,btn_recharge);
-		tv_remaining.setText("￥"+getSharedPreferenceValue("predeposit"));
+		tv_remaining.setText(getSharedPreferenceValue("predeposit"));
 	}
 	@Override
 	public void onClick(View v) {

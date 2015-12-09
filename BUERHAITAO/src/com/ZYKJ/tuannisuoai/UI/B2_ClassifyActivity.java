@@ -60,6 +60,13 @@ public class B2_ClassifyActivity extends BaseActivity{
 		initView();
 		requestData();
 	}
+
+	@Override
+	//每次进入都刷新
+	protected void onResume() {
+		super.onResume();
+		cl_address.setText(getSharedPreferenceValue("cityname"));
+	};
 	
 	/**
 	 * 初始化页面
@@ -70,9 +77,7 @@ public class B2_ClassifyActivity extends BaseActivity{
 		product_grid = (GridView)findViewById(R.id.product_grid);
 		rl_sousuokuang = (RelativeLayout)findViewById(R.id.rl_sousuokuang);
 		search_input = (EditText)findViewById(R.id.search_input);
-		cl_address.setText(getSharedPreferenceValue("cityname"));
         mRadioParams = new RadioGroup.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
 		setListener(cl_address,rl_sousuokuang,search_input);
 	}
 	

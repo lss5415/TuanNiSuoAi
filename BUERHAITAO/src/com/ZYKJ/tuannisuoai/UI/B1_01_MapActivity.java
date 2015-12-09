@@ -46,7 +46,7 @@ public class B1_01_MapActivity extends BaseActivity{
 	private SideBar sideBar;
 	private SortAdapter adapter;
 	private ImageView im_b101_back;
-	private TextView tv_findcityname,tv_dangqiancity;
+	private TextView tv_findcityname,tv_dangqiancity,tv_zj1,tv_zj2,tv_zj3;
 	
 	/**
 	 * 汉字转换成拼音的类
@@ -80,10 +80,24 @@ public class B1_01_MapActivity extends BaseActivity{
 		pinyinComparator = new PinyinComparator();
 		tv_findcityname = (TextView)findViewById(R.id.tv_findcityname);
 		tv_dangqiancity = (TextView)findViewById(R.id.tv_dangqiancity);
+		tv_zj1 = (TextView)findViewById(R.id.tv_zj1);
+		tv_zj2 = (TextView)findViewById(R.id.tv_zj2);
+		tv_zj3 = (TextView)findViewById(R.id.tv_zj3);
 		sideBar = (SideBar) findViewById(R.id.sidrbar);
 		dialog = (TextView) findViewById(R.id.dialog);
 		im_b101_back = (ImageView)findViewById(R.id.im_b101_back);
-
+		if (!getSharedPreferenceValue("tv_zj1").equals("")){
+			tv_zj1.setVisibility(View.VISIBLE);
+			tv_zj1.setText(getSharedPreferenceValue("tv_zj1").toString());
+		}
+		if (!getSharedPreferenceValue("tv_zj2").equals("")){
+			tv_zj2.setVisibility(View.VISIBLE);
+			tv_zj2.setText(getSharedPreferenceValue("tv_zj2").toString());
+		}
+		if (!getSharedPreferenceValue("tv_zj3").equals("")){
+			tv_zj3.setVisibility(View.VISIBLE);
+			tv_zj3.setText(getSharedPreferenceValue("tv_zj3").toString());
+		}
 		mObs = new DiaryLocationObsever();	
 		mLocationUtil = new LocationUtil();
 		mLocationUtil.initiLocationUtil(this, this.mObs);
@@ -122,7 +136,7 @@ public class B1_01_MapActivity extends BaseActivity{
 		});
 		
 		HttpUtils.getCityList(res_getCityList);
-		setListener(im_b101_back,tv_findcityname);
+		setListener(im_b101_back,tv_findcityname,tv_zj1,tv_zj2,tv_zj3);
 	}
 
 
@@ -163,6 +177,45 @@ public class B1_01_MapActivity extends BaseActivity{
 			break;
 		case R.id.tv_findcityname:
 			HttpUtils.getCityName(res_getCityName1,lng,lat);
+			break;
+		case R.id.tv_zj1:
+			citynamex = getSharedPreferenceValue("tv_zj1");
+			area_idx = getSharedPreferenceValue("tv_zj11");
+			tv_findcityname.setText(citynamex);
+			tv_dangqiancity.setText(citynamex);					
+			Intent mapit1 = new Intent(B1_01_MapActivity.this,B1_HomeActivity.class);
+			mapit1.putExtra("lng",lng);
+			mapit1.putExtra("lat",lat);
+			mapit1.putExtra("cityname",citynamex);
+			mapit1.putExtra("cityid",area_idx);
+			B1_01_MapActivity.this.setResult(Activity.RESULT_OK, mapit1);
+			B1_01_MapActivity.this.finish();
+			break;
+		case R.id.tv_zj2:
+			citynamex = getSharedPreferenceValue("tv_zj2");
+			area_idx = getSharedPreferenceValue("tv_zj22");
+			tv_findcityname.setText(citynamex);
+			tv_dangqiancity.setText(citynamex);					
+			Intent mapit2 = new Intent(B1_01_MapActivity.this,B1_HomeActivity.class);
+			mapit2.putExtra("lng",lng);
+			mapit2.putExtra("lat",lat);
+			mapit2.putExtra("cityname",citynamex);
+			mapit2.putExtra("cityid",area_idx);
+			B1_01_MapActivity.this.setResult(Activity.RESULT_OK, mapit2);
+			B1_01_MapActivity.this.finish();
+			break;
+		case R.id.tv_zj3:
+			citynamex = getSharedPreferenceValue("tv_zj3");
+			area_idx = getSharedPreferenceValue("tv_zj33");
+			tv_findcityname.setText(citynamex);
+			tv_dangqiancity.setText(citynamex);					
+			Intent mapit3 = new Intent(B1_01_MapActivity.this,B1_HomeActivity.class);
+			mapit3.putExtra("lng",lng);
+			mapit3.putExtra("lat",lat);
+			mapit3.putExtra("cityname",citynamex);
+			mapit3.putExtra("cityid",area_idx);
+			B1_01_MapActivity.this.setResult(Activity.RESULT_OK, mapit3);
+			B1_01_MapActivity.this.finish();
 			break;
 		default:
 			break;

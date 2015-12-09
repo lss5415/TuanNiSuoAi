@@ -117,7 +117,15 @@ public class A0_Welcome extends BaseActivity {
 				// Tools.toast(A0_Welcome.this,
 				// "城市="+location.getCity()+"lat="+location.getLatitude()+"long="+location.getLongitude());
 			} else {
-				Toast.makeText(A0_Welcome.this, "定位出现异常", Toast.LENGTH_LONG)
+				String lng = "118.338501";
+				String lat = "35.063786";
+				putSharedPreferenceValue("lng", lng);
+				putSharedPreferenceValue("lat", lat);
+				String cityname = "临沂";
+				String cityid = "235";
+				putSharedPreferenceValue("cityname", cityname);
+				putSharedPreferenceValue("cityid", cityid);
+				Toast.makeText(A0_Welcome.this, "定位失败，默认切换到临沂", Toast.LENGTH_LONG)
 						.show();
 			}
 		}
@@ -148,7 +156,6 @@ public class A0_Welcome extends BaseActivity {
 					putSharedPreferenceValue("cityname", cityname);
 					putSharedPreferenceValue("cityid", cityid);
 				} catch (org.json.JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			} else// 失败

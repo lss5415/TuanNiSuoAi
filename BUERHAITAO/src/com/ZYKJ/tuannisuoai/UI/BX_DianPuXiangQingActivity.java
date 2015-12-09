@@ -35,6 +35,7 @@ import com.ZYKJ.tuannisuoai.base.BaseActivity;
 import com.ZYKJ.tuannisuoai.utils.AnimateFirstDisplayListener;
 import com.ZYKJ.tuannisuoai.utils.HttpUtils;
 import com.ZYKJ.tuannisuoai.utils.ImageOptions;
+import com.ZYKJ.tuannisuoai.utils.StringUtil;
 import com.ZYKJ.tuannisuoai.utils.Tools;
 import com.ZYKJ.tuannisuoai.view.MyListView;
 import com.ZYKJ.tuannisuoai.view.RequestDailog;
@@ -231,8 +232,13 @@ public class BX_DianPuXiangQingActivity extends BaseActivity implements IXListVi
 						im_storeshoucang.setImageDrawable(getResources().getDrawable(R.drawable.storeyishoucang));
 					}
 					ImageLoader.getInstance().displayImage(obj.getString("store_avatar"), im_xiao_xqback, ImageOptions.getOpstion(), animateFirstListener);
+
 					rb_dpxiangqing_rating_bar.setRating(Float.parseFloat(obj.getString("store_credit_composite")));
-					tv_store_address.setText(obj.getString("location"));
+					if (obj.getString("location").equals("null")) {
+						tv_store_address.setText("");
+					}else {
+						tv_store_address.setText(StringUtil.toString(obj.getString("location"), ""));
+					}
 					endlat = obj.getString("lat");
 					endlng = obj.getString("lng");
 					store_phone = obj.getString("store_phone");
@@ -310,6 +316,7 @@ public class BX_DianPuXiangQingActivity extends BaseActivity implements IXListVi
 			FenXiang fx = new FenXiang(getApplicationContext(),BX_DianPuXiangQingActivity.this,fxnr,fxtp);
 			break;
 		case R.id.im_storeshoucang:
+			if (isLogin()) {
 			if (isshoucang=="false") {
 				isshoucang="true";
 				im_storeshoucang.setImageDrawable(getResources().getDrawable(R.drawable.storeshoucang));
@@ -318,6 +325,11 @@ public class BX_DianPuXiangQingActivity extends BaseActivity implements IXListVi
 				isshoucang="false";
 				im_storeshoucang.setImageDrawable(getResources().getDrawable(R.drawable.storeyishoucang));
 				HttpUtils.delStore(res_delstore, store_id, key);
+			}
+			}else {
+				Intent intent_login=new Intent();
+				intent_login.setClass(this, B5_1_LoginActivity.class);
+				startActivity(intent_login);
 			}
 			break;
 		case R.id.im_store_phone:
@@ -416,5 +428,14 @@ public class BX_DianPuXiangQingActivity extends BaseActivity implements IXListVi
 			viewPager.stopAutoScroll();
 		}
 
+	}
+	
+	public boolean isLogin()
+	{
+		if (getSharedPreferenceValue("userid").equals("")) {
+			return false;
+		}else {
+			return true;
+		}
 	}
 }
