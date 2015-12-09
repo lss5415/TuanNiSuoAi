@@ -58,7 +58,7 @@ public class B3_ShoppingCartActivity extends BaseActivity implements RefreshExpa
 	private void initView(){
 		/*tv_sp_title = (TextView)findViewById(R.id.tv_sp_title);
 		*/
-		expandableList = (ExpandableListView)findViewById(R.id.list_shoppingcar);
+		expandableList = (ExpandableListView)findViewById(R.id.list_shoppingcar);//购物列表
 		expandableList.setGroupIndicator(null);
 		tv_jiesuan = (TextView)findViewById(R.id.tv_jiesuan);//结算
 		tv_sumgoods = (TextView)findViewById(R.id.tv_sumgoods);//总价
@@ -149,7 +149,7 @@ public class B3_ShoppingCartActivity extends BaseActivity implements RefreshExpa
 	 */
 	private void initData() {
 		for (int i = 0; i < dataList.size(); i++) {
-			sumtiaoshu =  sumtiaoshu + dataList.get(i).getStore_list().size();
+			sumtiaoshu =  sumtiaoshu + dataList.get(i).getStore_list().size();//商品总条数
 		}
 //		Toast.makeText(getApplicationContext(), ""+sumtiaoshu, Toast.LENGTH_LONG).show();
 		adapter = new B3_ShpppingCartAdapter(this, dataList,ischeck,sumtiaoshu,this,getSharedPreferenceValue("key"));
@@ -204,7 +204,6 @@ public class B3_ShoppingCartActivity extends BaseActivity implements RefreshExpa
 				datas = response.getJSONObject("datas");
 				 error = response.getJSONObject("datas").getString("error");
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if (error==null)//成功
@@ -255,26 +254,24 @@ public class B3_ShoppingCartActivity extends BaseActivity implements RefreshExpa
 					adapter.notifyDataSetChanged();
 				} 
 				catch (org.json.JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
 			}
 			else//失败 
 			{
 				Tools.Log("res_Points_error="+error+"");
 //				Tools.Notic(B5_MyActivity.this, error+"", null);
 			}
-			
-			
 		};
-		
 	};
-
+	
 	@Override
 	protected void onResume() {
 		super.onResume();
 		HttpUtils.getShoppingCarInfoList(res_ShoppingCarInfo, key);
+		im_checkall.setSelected(false);
+		tv_jiesuan.setText("结算（0）");
+		tv_sumgoods.setText("0.00");
 	};
 
 	@Override

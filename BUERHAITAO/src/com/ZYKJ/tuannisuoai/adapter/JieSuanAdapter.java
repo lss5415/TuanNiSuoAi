@@ -31,12 +31,14 @@ public class JieSuanAdapter extends BaseExpandableListAdapter {
 	private Context context;
 	private LayoutInflater inflater;
 	private List<CarJieSuan> object;
+	private OnSelectedFreightListener listener;
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
-	public JieSuanAdapter(Context context, JSONArray datas, List<CarJieSuan> object) {
+	public JieSuanAdapter(Context context, JSONArray datas, List<CarJieSuan> object, OnSelectedFreightListener listener) {
 		this.datas = datas;
 		this.context = context;
 		this.object = object;
+		this.listener = listener;
         inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
@@ -194,13 +196,19 @@ public class JieSuanAdapter extends BaseExpandableListAdapter {
 				break;
 			case R.id.dialog_modif_1:
 				UIDialog.closeDialog();
-				viewHolder.tv_psfs.setText("物流配送(配送费："+freight_price+")");
-				object.get(position).setDlyoPickupType("物流配送");
+				if(!"物流配送".equals(object.get(position).getDlyoPickupType())){
+					viewHolder.tv_psfs.setText("物流配送(配送费："+freight_price+")");
+					object.get(position).setDlyoPickupType("物流配送");
+					listener.setOrderPrice(1, Float.valueOf(freight_price));
+				}
 				break;
 			case R.id.dialog_modif_2:
 				UIDialog.closeDialog();
-				viewHolder.tv_psfs.setText("自提");
-				object.get(position).setDlyoPickupType("自提");
+				if(!"自提".equals(object.get(position).getDlyoPickupType())){
+					viewHolder.tv_psfs.setText("自提");
+					object.get(position).setDlyoPickupType("自提");
+					listener.setOrderPrice(0, Float.valueOf(freight_price));
+				}
 				break;
 			case R.id.dialog_modif_3:
 				UIDialog.closeDialog();
@@ -210,5 +218,8 @@ public class JieSuanAdapter extends BaseExpandableListAdapter {
 			}
 		}
 	}
-
+	
+	public interface OnSelectedFreightListener{
+		void setOrderPrice(int type, float price);//type 0-减 1-加
+	}
 }

@@ -31,60 +31,44 @@
             android:textSize="18sp" />
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_dizhi"
-        android:layout_width="fill_parent"
-        android:layout_height="80dp"
-        android:orientation="horizontal" >
-
+    <RelativeLayout
+        android:id="@+id/et_buy_address"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include
+            android:visibility="gone"
+            android:id="@+id/order_show_address"
+            layout="@layout/myadress_item"/>
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="10dp"
-            android:orientation="vertical" >
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="30dp"
-                android:gravity="center_vertical" >
-
-                <TextView
-                    android:id="@+id/tv_buyer_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="收货人：张三"
-                    android:textColor="#000"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tv_buyer_number"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center_horizontal"
-                    android:text="18709927173"
-                    android:textColor="#000"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="3dp" >
-
-                <TextView
-                    android:id="@+id/tv_buyer_address"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:maxLines="2"
-                    android:ellipsize="end"
-                    android:text="收货地址：山东省临沂市兰山区，金鼎国际大厦**楼**室"
-                    android:textColor="#000" />
-            </LinearLayout>
+            android:id="@+id/order_add_address"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dp"
+            android:gravity="center_vertical">
+            <ImageView
+                android:scaleType="centerInside"
+                android:src="@drawable/addtag"
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="\t新增收餐地址"
+                android:textColor="@color/theme_color"/>
+	        <ImageView
+	            android:layout_width="20dp"
+	            android:layout_height="20dp"
+	            android:src="@drawable/arrow_right"
+	            android:layout_marginRight="10dp"/>
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
+    
+    
 
     <View
         android:layout_width="fill_parent"
